@@ -1,0 +1,25 @@
+.search-btn{
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    position:sticky;
+    margin-left: -7.6rem;
+    margin-top:  0rem;
+    border-radius: 5rem;
+    background: #335675;
+    border: none;
+    font-size: 20px;
+    color: #f2f3f8;
+    text-align: center;
+    justify-content: center;
+}
+
+input .search-controller-topbar{
+    border-radius: 5rem;
+  
+    position: relative;
+    
+}
+.nav-item-nav-profile-d-none-d-xl-flex{
+    transform: rotate(90deg);
+}
