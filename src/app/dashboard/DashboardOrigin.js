@@ -598,24 +598,24 @@ export class Dashboard extends Component {
         </div>
         <div>
           <div className="d-sm-flex justify-content-between align-items-start">
-            <h2 className="text-dark font-weight-bold mb-2"> Dashboard Geral</h2>
+            <h2 className="text-dark font-weight-bold mb-2"> Overview dashboard </h2>
             <div className="d-sm-flex justify-content-xl-between align-items-center mb-2">
               <div className="btn-group d-none d-xl-flex bg-white p-3" role="group" aria-label="Basic example">
-                <button type="button" className="btn btn-link text-light py-0 font-weight-medium border-right">7 Dias</button>
-                <button type="button" className="btn btn-link text-dark py-0 font-weight-medium border-right">Agora</button>
-                <button type="button" className="btn btn-link text-light font-weight-medium py-0">1 Mês</button>
+                <button type="button" className="btn btn-link text-light py-0 font-weight-medium border-right">7 Days</button>
+                <button type="button" className="btn btn-link text-dark py-0 font-weight-medium border-right">1 Month</button>
+                <button type="button" className="btn btn-link text-light font-weight-medium py-0">3 Month</button>
               </div>
               <div className="dropdown ml-0 ml-md-4 mt-2 mt-lg-0">
                 <Dropdown alignRight>
                   <Dropdown.Toggle className="bg-white dropdown-toggle border-0 p-3 mr-0 text-muted d-flex align-items-center">
-                  <i className="mdi mdi-calendar mr-1"></i>24 Mar 2022 - 24 Mar 2022
+                  <i className="mdi mdi-calendar mr-1"></i>24 Mar 2019 - 24 Mar 2019
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                    <Dropdown.Item>24 Mar 2022 - 24 Mar 2022</Dropdown.Item>
-                    <Dropdown.Item>24 April 2022 - 24 May 2022</Dropdown.Item>
-                    <Dropdown.Item>24 May 2022 - 24 Jun 2022</Dropdown.Item>
+                    <Dropdown.Item>24 Mar 2019 - 24 Mar 2019</Dropdown.Item>
+                    <Dropdown.Item>24 April 2019 - 24 May 2019</Dropdown.Item>
+                    <Dropdown.Item>24 May 2019 - 24 Jun 2019</Dropdown.Item>
                     <Dropdown.Divider></Dropdown.Divider>
-                    <Dropdown.Item>24 Jun 2022 - 24 July 2022</Dropdown.Item>
+                    <Dropdown.Item>24 Jun 2019 - 24 July 2019</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </div>
@@ -758,8 +758,51 @@ export class Dashboard extends Component {
                                       </div>
                                     </div>
                                   </div>
-                                 
-                                 
+                                  <div className="col-lg-3 col-sm-4 grid-margin  grid-margin-lg-0">
+                                    <div className="wrapper pb-5 border-bottom">
+                                      <div className="text-wrapper d-flex align-items-center justify-content-between mb-2">
+                                        <p className="mb-0 text-dark">Total Profit</p>
+                                        <span className="text-success"><i className="mdi mdi-arrow-up"></i>2.95%</span>
+                                      </div>
+                                      <h3 className="mb-0 text-dark font-weight-bold">$ 92556</h3>
+                                      <Line data={this.totalProfitData} options={this.totalProfitOptions} />
+                                    </div>
+                                    <div className="wrapper pt-5">
+                                      <div className="text-wrapper d-flex align-items-center justify-content-between mb-2">
+                                        <p className="mb-0 text-dark">Expenses</p>
+                                        <span className="text-success"><i className="mdi mdi-arrow-up"></i>52.95%</span>
+                                      </div>
+                                      <h3 className="mb-4 text-dark font-weight-bold">$ 59565</h3>
+                                      <Line data={this.totalExpencesData} options={this.totalExpencesOptions} />
+                                    </div>
+                                  </div>
+                                  <div className="col-lg-9 col-sm-8 grid-margin  grid-margin-lg-0">
+                                    <div className="pl-0 pl-lg-4 ">
+                                      <div className="d-xl-flex justify-content-between align-items-center mb-2">
+                                        <div className="d-lg-flex align-items-center mb-2 mb-xl-0">
+                                          <h3 className="text-dark font-weight-bold mr-2 mb-0">Devices sales</h3>
+                                          <h5 className="mb-0">( growth 62% )</h5>
+                                        </div>
+                                        <div className="d-lg-flex">
+                                          <p className="mr-2 mb-0">Timezone:</p>
+                                          <p className="text-dark font-weight-bold mb-0">GMT-0400 Eastern Delight Time</p>
+                                        </div>
+                                      </div>
+                                      <div id="visit-sale-chart-legend" className="legend-top-right float-right">
+                                        <ul className="legend-horizontal">
+                                          <li>
+                                            <span className="legend-dots bg-info">
+                                            </span>Demand
+                                          </li>
+                                          <li>
+                                            <span className="legend-dots bg-danger">
+                                            </span>Supply
+                                          </li>
+                                        </ul>
+                                      </div>
+                                      <Bar data={this.deviceSaleData} options={this.deviceSaleOptions} />
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -790,44 +833,65 @@ export class Dashboard extends Component {
                               </div>
                             </div>
                           </div>
-                          
+                          <div className="col-sm-8  grid-margin stretch-card">
+                            <div className="card">
+                              <div className="card-body">
+                                <div className="d-xl-flex justify-content-between mb-2">
+                                  <h4 className="card-title">Page views analytics</h4>
+                                  <div id="visit-sale-chart-legend" className="legend-top-right float-right">
+                                    <ul className="legend-horizontal">
+                                      <li>
+                                        <span className="legend-dots bg-success">
+                                        </span>This week
+                                      </li>
+                                      <li>
+                                        <span className="legend-dots bg-primary">
+                                        </span>Current week
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <Line data={this.pageViewAnalyticData} options={this.pageViewAnalyticOptions} />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div className="row">
                           <div className="col-xl-4 col-lg-12 col-sm-12 grid-margin grid-margin-lg-0 stretch-card">
                             <div className="card">
                               <div className="card-body recent-activity">
-                                <h4 className="card-title">Atividade Recente</h4>
+                                <h4 className="card-title">Recent Activity</h4>
                                 <div className="d-flex mb-3">
                                   <div>
-                                    <div className="activity-info bg-danger"> A </div>
+                                    <div className="activity-info bg-danger"> I </div>
                                   </div>
                                   <div className="activity-details">
-                                    <h4 className="text-dark font-weight-normal">Abel Pires</h4>
-                                    <p className="mb-0">executou um plano de ação</p>
+                                    <h4 className="text-dark font-weight-normal">Iva Barber</h4>
+                                    <p className="mb-0">added new task on trello</p>
                                     <p className="text-small mb-0">05:58AM</p>
                                   </div>
                                 </div>
                                 <div className="d-flex mb-3">
-                                  <div className="activity-info bg-warning"> J </div>
+                                  <div className="activity-info bg-warning"> D </div>
                                   <div className="activity-details">
-                                    <h4 className="text-dark font-weight-normal">Jaime Maia</h4>
-                                    <p className="mb-0">adicionou um plano de ação</p>
+                                    <h4 className="text-dark font-weight-normal">Dorothy Romero</h4>
+                                    <p className="mb-0">added new task on trello</p>
                                     <p className="text-small mb-0">02:50PM</p>
                                   </div>
                                 </div>
                                 <div className="d-flex mb-3">
-                                  <div className="activity-info bg-success"> N </div>
+                                  <div className="activity-info bg-success"> R </div>
                                   <div className="activity-details">
-                                    <h4 className="text-dark font-weight-normal">Nuno Gouveia</h4>
-                                    <p className="mb-0">adicionou um alerta</p>
+                                    <h4 className="text-dark font-weight-normal">Ricardo Hawkins</h4>
+                                    <p className="mb-0">added new task on trello</p>
                                     <p className="text-small mb-0">05:22AM</p>
                                   </div>
                                 </div>
                                 <div className="d-flex">
-                                  <div className="activity-info hide-border bg-info"> A </div>
+                                  <div className="activity-info hide-border bg-info"> N </div>
                                   <div className="activity-details">
-                                    <h4 className="text-dark font-weight-normal">Abel Pires</h4>
-                                    <p className="mb-0">adicionou um novo diretor de loja</p>
+                                    <h4 className="text-dark font-weight-normal">Noah Montgomery</h4>
+                                    <p className="mb-0">added new task on trello</p>
                                     <p className="text-small mb-0">08:19PM</p>
                                   </div>
                                 </div>

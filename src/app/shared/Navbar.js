@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Trans } from 'react-i18next';
+import isafetyLogo from '../../assets/logo/_logo_isafety_full.png'
+import isafetyLogoSmall from '../../assets/logo/_logo_isafety_vector_white.png'
 
 class Navbar extends Component {
   toggleOffcanvas() {
@@ -11,8 +13,8 @@ class Navbar extends Component {
     return (
       <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <Link className="navbar-brand brand-logo" to="/"><img src={require('../../assets/logo/_logo_isafety_full.png')} alt="logo" /></Link>
-          <Link className="navbar-brand brand-logo-mini" to="/"><img src={require('../../assets/logo/_logo_isafety_vector_white.png')} alt="logo" /></Link>
+          <Link className="navbar-brand brand-logo" to="/"><img src={isafetyLogo} alt="logo" style={{height:"37px"}}/></Link>
+          <Link className="navbar-brand brand-logo-mini" to="/"><img src={isafetyLogoSmall} alt="logo" style={{width:"30px", height:"30px"}}/></Link>
         </div>
         <div className="navbar-menu-wrapper d-flex align-items-stretch">
           <button className="navbar-toggler navbar-toggler align-self-center" type="button" onClick={ () => document.body.classList.toggle('sidebar-icon-only') }>

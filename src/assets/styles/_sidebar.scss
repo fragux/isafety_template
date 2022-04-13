@@ -1,9 +1,11 @@
 .sidebar {
   min-height: calc(100vh - #{$navbar-height});
-  background: $sidebar-dark-bg;
+  background: rgb(80,130,175);
+  background: linear-gradient(180deg, rgb(55, 116, 169) 0%, rgb(9, 45, 75) 35%);
   font-family: $type1;
   font-weight: 600;
   padding: 0;
+  color: white;
   width: $sidebar-width-lg;
   z-index: 11;
   transition: width $action-transition-duration $action-transition-timing-function, background $action-transition-duration $action-transition-timing-function;
@@ -35,7 +37,7 @@
         @include align-items(center);
         white-space: nowrap;
         padding:$sidebar-menu-padding-y 0 $sidebar-menu-padding-y 0;
-        color: $sidebar-dark-menu-color;
+        color: white;
         @include transition-duration(0.45s);
         transition-property: color;
         -webkit-transition-property: color;
@@ -57,7 +59,7 @@
             margin-right: 0;
           }
           .menu-icon {
-            color: $sidebar-dark-icon-color; 
+            color: white; 
 
             &:after,
             &:before {
@@ -143,21 +145,21 @@
             left: 0;
             top: .5rem;
             bottom: 0;
-            background: theme-color(success);
-            height: 24px;
-            width: 4px;
+            background: white;
+            height: 30px;
+            width: 8px;
             .rtl & {
               left: auto;
               right: 0;
             }
           }
           .menu-title {
-            color: $sidebar-dark-menu-active-color;
+            color: white;
             font-family: $type1;
             font-weight: 600;          
           }
           i {
-            color: theme-color(success);
+            color: white;
           }
         }
       }
@@ -311,6 +313,7 @@
 
       .nav-item {
         padding: 0;
+        margin-left: 1rem;
         .nav-link {
           color: $sidebar-dark-submenu-color;
           padding: $sidebar-submenu-item-padding;
@@ -336,14 +339,14 @@
             font-size: .75rem;
           }
           &.active {
-            color: $sidebar-dark-menu-active-color;
+            color: white;
             background: transparent;
             &:before {
-              color: theme-color(success);
+              color: white;
             }
           }
           &:hover {
-            color: $sidebar-dark-submenu-hover-color;
+            color: white;
           }
         }
         &:hover {
