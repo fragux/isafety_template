@@ -64,14 +64,14 @@ class Sidebar extends Component {
           <li className="nav-item nav-category"><Trans>Geral</Trans></li>
           <li className={ this.isPathActive('/dashboard') ? 'nav-item active' : 'nav-item' }>
             <Link className="nav-link" to="/dashboard">
-              <span className="icon-bg"><img src={Sonae} style={{width: "25px"}}/></span>
+              <span className="icon-bg"><img src={Sonae} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"><Trans>SONAE</Trans></span>
             </Link>
           </li>
           <li className="nav-item nav-category"><Trans>Insígnia</Trans></li>
           <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.basicUiMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicUiMenuOpen') } data-toggle="collapse">
-              <span className="icon-bg"><img src={Continente} style={{width: "25px"}}/></span>
+              <span className="icon-bg"><img src={Continente} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"><Trans>Continente</Trans></span>
               <i className="menu-arrow"></i>
             </div>
@@ -85,7 +85,7 @@ class Sidebar extends Component {
           </li>
           <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.iconsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('iconsMenuOpen') } data-toggle="collapse">
-              <span className="icon-bg"><img src={ContinenteM} style={{width: "25px"}}/></span>
+              <span className="icon-bg"><img src={ContinenteM} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"><Trans>Modelo</Trans></span>
               <i className="menu-arrow"></i>
             </div>
@@ -99,7 +99,7 @@ class Sidebar extends Component {
           </li>
           <li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.formElementsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('formElementsMenuOpen') } data-toggle="collapse">
-              <span className="icon-bg"><img src={ContinenteBD} style={{width: "25px"}}/></span>
+              <span className="icon-bg"><img src={ContinenteBD} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"><Trans>Bom Dia</Trans></span>
               <i className="menu-arrow"></i>
             </div>
@@ -164,7 +164,7 @@ class Sidebar extends Component {
             </Collapse>
     </li>*/}
           <li className="nav-item documentation-link">
-            <a className="nav-link" href="">
+            <a className="nav-link" href="http://www.google.com">
               <span className="icon-bg">
                 <i className="mdi mdi-file-document-box menu-icon"></i>
               </span>

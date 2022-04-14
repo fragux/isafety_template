@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "@mdi/font": "^4.2.95",
+    "@react-leaflet/core": "^1.1.1",
     "@svgr/core": "^6.2.1",
     "@tinymce/tinymce-react": "^3.3.2",
     "ajv": "^8.11.0",
     "ajv-keywords": "^3.5.2",
+    "axios": "^0.26.1",
     "babel-plugin-react-svg": "^3.0.3",
     "bootstrap": "^4.3.1",
     "bootstrap-sass": "^3.4.3",
@@ -23,6 +25,7 @@
     "i18next": "^19.0.0",
     "i18next-browser-languagedetector": "^4.0.1",
     "latest": "^0.2.0",
+    "leaflet": "^1.7.1",
     "namor": "^1.1.3",
     "node-sass": "^7.0.1",
     "react": "^18.0.0",
@@ -44,10 +47,14 @@
     "react-dnd-multi-backend": "^3.2.2",
     "react-dnd-touch-backend": "^9.0.0",
     "react-dom": "^18.0.0",
+    "react-esri-leaflet": "^1.3.1",
     "react-i18next": "^11.1.0",
+    "react-icons": "^4.3.1",
     "react-images": "^1.0.0",
     "react-input-mask": "^3.0.0-alpha.0",
     "react-jvectormap": "0.0.13",
+    "react-leaflet": "^3.2.2",
+    "react-leaflet-markercluster": "^3.0.0-rc1",
     "react-multistep": "^3.6.13",
     "react-quill": "^1.3.3",
     "react-router-dom": "^5.0.1",
@@ -88,6 +95,7 @@
     ]
   },
   "devDependencies": {
+    "@types/leaflet": "^1.7.9",
     "sass": "^1.50.0",
     "sass-loader": "^12.6.0"
   }

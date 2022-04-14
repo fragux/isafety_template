@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.title_table{
+    padding: 1.5rem;
+    padding-left: 1rem;
+    color: #335675;
+}

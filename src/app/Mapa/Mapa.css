@@ -1,0 +1,21 @@
+@import url("~leaflet/dist/leaflet.css");
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+  .marker-cluster-custom {
+    background: #335675;
+    border: 5px solid #5082AF;
+    border-radius: 50%;
+    color: #ededed;
+    height: 40px;
+    line-height: 37px;
+    text-align: center;
+    width: 40px;
+  }
+
+  .mapa{
+    border-radius: 5;    
+  }
