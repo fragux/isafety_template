@@ -194,4 +194,21 @@ router.get("/loja/id/:Cadeia", async (req, res) => {
   }
 });
 
+router.get("/dashboard/:Cadeia", async (req, res) => {
+  const Cadeia = req.query.Cadeia;
+
+  try {
+    const getInsignia = await lojaDataCopy.find({ Cadeia }, "");
+
+    if (!getInsignia) {
+      res.status(422).json({ message: "Insignia não encontrada!" });
+      return;
+    }
+
+    res.status(200).json(getInsignia);
+  } catch (error) {
+    res.status(500).json({ erro: error });
+  }
+});
+
 module.exports = router;

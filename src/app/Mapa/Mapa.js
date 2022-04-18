@@ -7,7 +7,8 @@ import {
   Popup,
   GeoJSON,
   Circle,
-  Tooltip
+  Tooltip,
+  useMapEvents,
 } from "react-leaflet";
 //import MarkerClusterGroup from "react-leaflet-markercluster";
 import { Link, useLocation } from "react-router-dom";
@@ -209,6 +210,16 @@ function Mapa({ loja }) {
     console.log("O que vem da dashboard", loja);
   }, [loja]);
 
+  function getClick(event) {
+    console.log("Está a clicar", event.latlng.lat);
+    const codigo = loja.find(
+      (loja) => parseFloat(loja.Lat.replace(",", ".")) === event.latlng.lat
+    );
+    console.log("Código da loja clicada: ", codigo.CodigoLoja);
+    console.log("ID do objecto da loja clicada: ", codigo._id);
+    //if (codigo) props.callBackCodigoLoja(codigo._id, codigo.CodigoLoja);
+  }
+
   return (
     <>
       <MapContainer
@@ -234,63 +245,62 @@ function Mapa({ loja }) {
             token="AAPKdc8bb8b75a65473e95cfbe85039aeb61DcaDPgSoDzPGo3FEGAf-Gpn9ADerBD_sukHa4uNLN1VH_33OugxT_xwAdtwu1rPj"
           />
         }
-        
-        {loja.map((continente,i) => {
-          if (continente.Insignia === "ContinenteBomDia" || continente.Insignia === "Continente" || continente.Insignia === "ContinenteModelo")
-          return(<Marker
-          key = {i}
-            position={[
-              parseFloat(continente.Lat.replace(",", ".")),
-              parseFloat(continente.Long.replace(",", ".")),
-            ]}
-            icon={getIcon(
-              parseFloat(continente.Nivel_risco),
-              continente.Disponivel
-            )}
-            // icon={getIcon(parseFloat(continente.Nivel_risco.replace(",", ".")), continente.Disponivel)} // Este nao funciona porque a maioria nao tem o risco para fazer replace
-            interactive={i}
-          >
-            <Popup>
-              <h3>{continente.Nome}</h3>
-              <p>
-                Lat: {parseFloat(continente.Lat.replace(",", "."))}
-                <br />
-                Long: {parseFloat(continente.Long.replace(",", "."))}
-                <br />
-                Nivel de Risco: {continente.Nivel_risco}
-              </p>
-              <Link to={`/dashboard/loja/:${continente._id}`}>Ver Mais</Link>
-            </Popup>
-          </Marker>)
-        })
-           
-              }
-        {loja?.map((elem, i) => {
-          if (elem.Insignia === "Continente" && elem.Insignia !== null )
-          <Marker position={[
-            parseFloat(elem.Lat.replace(",", ".")),
-            parseFloat(elem.Long.replace(",", ".")),
-          ]}></Marker>
-            {/*<Marker
-              position={[
-                parseFloat(elem.Lat.replace(",", ".")),
-                parseFloat(elem.Long.replace(",", ".")),
-              ]}
-              icon={getIcon(parseFloat(elem.Nivel_risco), elem.Disponivel)}
-              // icon={getIcon(parseFloat(continente.Nivel_risco.replace(",", ".")), continente.Disponivel)} // Este nao funciona porque a maioria nao tem o risco para fazer replace
-              interactive={true}
-              riseOnHover={true}
-              bubblingMouseEvents={true}
 
-              key = {i}
-            >
-              
-              <Circle 
-                  center={{lat:elem.Lat.replace(",", "."), lng: elem.Long.replace(",", ".")}}
-                  fillColor="blue" 
-                  radius={50}/>
-            </Marker>*/}
-          
+        {loja.map((continente, i) => {
+          if (
+            continente.Insignia === "ContinenteBomDia" ||
+            continente.Insignia === "Continente" ||
+            continente.Insignia === "ContinenteModelo"
+          )
+            return (
+              <Marker
+                key={i}
+                position={[
+                  parseFloat(continente.Lat.replace(",", ".")),
+                  parseFloat(continente.Long.replace(",", ".")),
+                ]}
+                icon={getIcon(
+                  parseFloat(continente.Nivel_risco),
+                  continente.Disponivel
+                )}
+                // icon={getIcon(parseFloat(continente.Nivel_risco.replace(",", ".")), continente.Disponivel)} // Este nao funciona porque a maioria nao tem o risco para fazer replace
+                interactive={true}
+                riseOnHover={true}
+                bubblingMouseEvents={true}
+                eventHandlers={{
+                  click: (e) => {
+                    getClick(e);
+                  },
+                }}
+              >
+                <Popup>
+                  <h4>{continente.Nome}</h4>
+                  <p>
+                    {"Loja" + ": " + continente.CodigoLoja}
+                    <br />
+                    {"DOP" + ": " + continente.DOP}
+                    <br />
+                    {"Concelho" + ": " + continente.Concelho}
+                  </p>
+                  <p>
+                    {"Nível de Risco" + ": "}
+                    <b style={{ color: "red" }}>{continente.Nivel_risco}</b>
+                  </p>
+
+                  <Link to={`/dashboard/loja/:${continente._id}`}>
+                    Ver Mais
+                  </Link>
+                </Popup>
+                <Tooltip direction="right" offset={[0, -2]} opacity={1} style={{"visible": true}}>
+                  <br />
+                  <ul className="list-star">
+                    <li>
+                      <b>{continente.Nome}</b>
+                    </li>
+                  </ul>
+                </Tooltip>
+              </Marker>
+            );
         })}
       </MapContainer>
     </>

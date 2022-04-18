@@ -1,7 +1,5 @@
-import React, { useEffect, useState, forwardRef, useRef } from "react";
+import React, { useEffect,  forwardRef} from "react";
 import MaterialTable from "material-table";
-import api from "../../Services/api";
-import { useLocation } from "react-router-dom";
 
 import {
   AddBox,
@@ -22,33 +20,13 @@ import {
 } from "@material-ui/icons";
 import "./Score.css";
 
-function Score() {
-  const [loja, setloja] = useState();
-  const location = useLocation();
-  const isMountedRef = useRef(true);
-  let rotaApi = "";
+function Score({loja}) {
+ 
 
   useEffect(() => {
-    //Atribuicao do endpoint para filtrar as lojas
-    //if (location.pathname === "")
-    rotaApi = "/app/loja";
-    /*else if (location.pathname === "/content/continentes")
-          rotaApi = "loja/id/Continente";
-        else if (location.pathname === "/content/bomdia")
-          rotaApi = "loja/id/ContinenteBomDia"*/
-    console.log(location.pathname);
-    //axios.get("http://localhost:3000/loja").then((data) => {
-    //  setLojas(data.data);
-    // });
-    //console.table(data.data);
-    api.get(rotaApi).then((response) => {
-      //setLojas(response.data);
-      console.table("Retorno da loja para a tabela: ", response.data);
-      if(isMountedRef.current)
-      setloja(response.data);
-    });
-    return () => isMountedRef.current = false;
-  }, []);
+    console.log("O que entra na tabela: ", loja);
+  
+  }, [loja]);
 
   const columns = [
     {
@@ -73,9 +51,12 @@ function Score() {
       title: "Risco",
       field: "Nivel_risco",
       //style: { textAlign: "right" },
-      render: (rowData) => (
-        <h2 style={{ width: 50, color: "red" }}>{rowData.Nivel_risco}</h2>
-      ),
+      render: (rowData) => {
+        if(rowData.Nivel_risco > 0.80 )
+               return <h4 style={{ width: 50, color: "red" }}>{rowData.Nivel_risco}</h4>
+        else  if(rowData.Nivel_risco < 0.4 ) return <h4 style={{ width: 50, color: "green" }}>{rowData.Nivel_risco}</h4>
+        else return <h4 style={{ width: 50, color: "orange" }}>{rowData.Nivel_risco}</h4>
+      },
       validate: (rowData) => rowData.Nivel_risco > 0.0,
     },
   ];

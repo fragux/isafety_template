@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import Mapa from "../Mapa/Mapa.js";
 import api from "../../Services/api";
+import Score from "../Score/Score.js";
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export class Dashboard extends Component {
               </div>
             </div>
 
-            <div className="col-xl-7">
+            <div className="col-xl-7" style={{border : "0px solid blue"}}>
               <div className="row">
                 <div className="card col-xl-4" style={{"padding": 0}}>
                   <div className="card" >
@@ -149,12 +150,16 @@ export class Dashboard extends Component {
                 </div>
               </div>
 
-              <div className="card"></div>
-              <div className="row">
-                <div className="col-md-12"></div>
+              <div className="row" style={{"marginTop": "0.5rem"}}>
+            <div className="col-xl-12" style={{padding : 0}}>
+                <div className="card col-xl-12" style={{"padding": 0}}>
+                  <Score loja = {this.state.loja}/>
+              </div>
+                </div>
               </div>
             </div>
           </div>
+              
         </div>
       </>
     );

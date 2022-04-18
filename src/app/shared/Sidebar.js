@@ -37,7 +37,7 @@ class Sidebar extends Component {
 
     const dropdownPaths = [
       {path:'/apps', state: 'appsMenuOpen'},
-      {path:'/basic-ui', state: 'basicUiMenuOpen'},
+      {path:'/continente', state: 'continenteMenuOpen'},
       {path:'/advanced-ui', state: 'advancedUiMenuOpen'},
       {path:'/form-elements', state: 'formElementsMenuOpen'},
       {path:'/tables', state: 'tablesMenuOpen'},
@@ -69,7 +69,7 @@ class Sidebar extends Component {
             </Link>
           </li>
           <li className="nav-item nav-category"><Trans>Insígnia</Trans></li>
-          <li className={ this.isPathActive('/basic-ui') ? 'nav-item active' : 'nav-item' }>
+          <li className={ this.isPathActive('/continente') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.basicUiMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('basicUiMenuOpen') } data-toggle="collapse">
               <span className="icon-bg"><img src={Continente} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"><Trans>Continente</Trans></span>
@@ -77,9 +77,9 @@ class Sidebar extends Component {
             </div>
             <Collapse in={ this.state.basicUiMenuOpen }>
               <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/buttons') ? 'nav-link active' : 'nav-link' } to="/basic-ui/buttons"><Trans>CNT Norte</Trans></Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/dropdowns') ? 'nav-link active' : 'nav-link' } to="/basic-ui/dropdowns"><Trans>CNT Centro</Trans></Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/basic-ui/typography') ? 'nav-link active' : 'nav-link' } to="/basic-ui/typography"><Trans>CNT Sul</Trans></Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/continente/cntnorte') ? 'nav-link active' : 'nav-link' } to="/continente/cntnorte"><Trans>CNT Norte</Trans></Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/continente/cntcentro') ? 'nav-link active' : 'nav-link' } to="/continente/cntcentro"><Trans>CNT Centro</Trans></Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/continente/cntsul') ? 'nav-link active' : 'nav-link' } to="/continente/cntsul"><Trans>CNT Sul</Trans></Link></li>
               </ul>
             </Collapse>
           </li>
