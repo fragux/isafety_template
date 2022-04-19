@@ -1,4 +1,4 @@
-import React, { useEffect,  forwardRef} from "react";
+import React, { forwardRef} from "react";
 import MaterialTable from "material-table";
 import { Link } from "react-router-dom";
 import { ProgressBar } from "react-bootstrap";
@@ -23,12 +23,13 @@ import {
 import "./Score.css";
 
 function Score({loja}) {
- 
+/*
 
   useEffect(() => {
     console.log("O que entra na tabela: ", loja);
   
   }, [loja]);
+*/
 
   const columns = [
     {

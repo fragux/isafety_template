@@ -5,8 +5,7 @@ const signUpTemplateCopy = require("../models/SignUpModels");
 const lojaDataCopy = require("../models/Loja");
 const bcrypt = require("bcrypt");
 
-router.use(express.json({extended:true}));
-
+router.use(express.json({ extended: true }));
 
 router.post("/signup", async (request, response) => {
   const saltPassword = await bcrypt.genSalt(10);
@@ -65,7 +64,7 @@ router.post("/sumeteloja", async (request, response) => {
     });
 });
 //este get retorna todas as lojas
-router.get("/loja", async (request, res) => {
+router.get("/dashboard", async (request, res) => {
   try {
     const data = await lojaDataCopy.find();
     res.status(200).json(data);
@@ -81,7 +80,7 @@ router.get('/loja',  async (request, response) => {
     })*/
 
 //este get retorna apenas uma loja
-router.get("/loja/:id", async (req, res) => {
+router.get("/dashboard/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
@@ -117,12 +116,46 @@ router.get("/loja/cadeia/:cadeia", function(req, res) {
   })
 })*/
 
-router.get("/loja/cadeia/:cadeia",function(req,res,next){
+router.get("/dashboard/cadeia/:cadeia", function (req, res, next) {
   console.log("Port 3000 - Query: ", req.params.cadeia);
-  lojaDataCopy.find({Cadeia: req.params.cadeia}).then(function(lojas){
+  lojaDataCopy
+    .find({ Cadeia: req.params.cadeia })
+    .then(function (lojas) {
       res.send(lojas);
-  }).catch(next);
+    })
+    .catch(next);
 });
+
+router.get("/dashboard/continente/:dop", function (req, res, next) {
+  console.log("Port 3000 - Query Continente DOP: ", req.params.dop);
+  lojaDataCopy
+    .find({DOP: new RegExp(req.params.dop.substring(0,3) +" "+  req.params.dop.substring(3,req.params.dop.length), "i") })
+    .then(function (lojas) {
+      res.send(lojas);
+    })
+    .catch(next);
+});
+
+router.get("/dashboard/modelo/:dop", function (req, res, next) {
+  console.log("Port 3000 - Query Modelo DOP: ", req.params.dop);
+  lojaDataCopy
+    .find({DOP: new RegExp(req.params.dop.substring(0,2) + req.params.dop.substring(2,req.params.dop.length), "i") })
+    .then(function (lojas) {
+      res.send(lojas);
+    })
+    .catch(next);
+});
+
+router.get("/dashboard/bomdia/:dop", function (req, res, next) {
+  console.log("Port 3000 - Query Bom Dia DOP: ", req.params.dop);
+  lojaDataCopy
+    .find({DOP: new RegExp(req.params.dop.substring(0,3) + req.params.dop.substring(3,req.params.dop.length), "i") })
+    .then(function (lojas) {
+      res.send(lojas);
+    })
+    .catch(next);
+});
+
 /*
 router.route('/loja/:id')
     .get((req, res) => {
@@ -211,10 +244,6 @@ router.delete("/loja/:id", async (req, res) => {
     res.status(500).json({ erro: error });
   }
 });
-
-
-
-
 
 /*router.get("/dashboard/:Cadeia", async (req, res) => {
   const Cadeia = req.query.Cadeia;

@@ -231,14 +231,7 @@ function renderRisco(value) {
 }
 
 function Mapa({ loja }) {
-  const [lojas, setLojas] = useState([]);
-  const location = useLocation();
-  let rotaApi = "";
-
-  useEffect(() => {
-    console.log("O que vem da dashboard", loja);
-  }, [loja]);
-
+ 
   function getClick(event) {
     console.log("Está a clicar", event.latlng.lat);
     const codigo = loja.find(

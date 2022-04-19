@@ -36,10 +36,10 @@ class Sidebar extends Component {
     });
 
     const dropdownPaths = [
-      {path:'/apps', state: 'appsMenuOpen'},
-      {path:'/continente', state: 'continenteMenuOpen'},
-      {path:'/advanced-ui', state: 'advancedUiMenuOpen'},
-      {path:'/form-elements', state: 'formElementsMenuOpen'},
+      {path:'/dashboard', state: 'appsMenuOpen'},
+      {path:'/dashboard/continente', state: 'basicUiMenuOpen'},
+      {path:'/dashboard/modelo', state: 'iconsMenuOpen'},
+      {path:'/dashboard/bomdia', state: 'formElementsMenuOpen'},
       {path:'/tables', state: 'tablesMenuOpen'},
       {path:'/maps', state: 'mapsMenuOpen'},
       {path:'/icons', state: 'iconsMenuOpen'},
@@ -83,7 +83,7 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
           </li>
-          <li className={ this.isPathActive('/icons') ? 'nav-item active' : 'nav-item' }>
+          <li className={ this.isPathActive('/modelo') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.iconsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('iconsMenuOpen') } data-toggle="collapse">
               <span className="icon-bg"><img src={ContinenteM} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"> Modelo </span>
@@ -91,13 +91,13 @@ class Sidebar extends Component {
             </div>
             <Collapse in={ this.state.iconsMenuOpen }>
               <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/icons/mdi') ? 'nav-link active' : 'nav-link' } to="/icons/mdi"> CM Norte </Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/icons/mdi') ? 'nav-link active' : 'nav-link' } to="/icons/mdi"> CM Centro </Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/icons/mdi') ? 'nav-link active' : 'nav-link' } to="/icons/mdi"> CM Sul </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/modelo/cmnorte') ? 'nav-link active' : 'nav-link' } to="/dashboard/modelo/cmnorte"> CM Norte </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/modelo/cmcentro') ? 'nav-link active' : 'nav-link' } to="/dashboard/modelo/cmcentro"> CM Centro </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/modelo/cmsul') ? 'nav-link active' : 'nav-link' } to="/dashboard/modelo/cmsul"> CM Sul </Link></li>
               </ul>
             </Collapse>
           </li>
-          <li className={ this.isPathActive('/form-elements') ? 'nav-item active' : 'nav-item' }>
+          <li className={ this.isPathActive('/bomdia') ? 'nav-item active' : 'nav-item' }>
             <div className={ this.state.formElementsMenuOpen ? 'nav-link menu-expanded' : 'nav-link' } onClick={ () => this.toggleMenuState('formElementsMenuOpen') } data-toggle="collapse">
               <span className="icon-bg"><img src={ContinenteBD} style={{width: "25px"}} alt = "logo"/></span>
               <span className="menu-title"> Bom Dia </span>
@@ -105,9 +105,9 @@ class Sidebar extends Component {
             </div>
             <Collapse in={ this.state.formElementsMenuOpen }>
               <ul className="nav flex-column sub-menu">
-                <li className="nav-item"> <Link className={ this.isPathActive('/form-elements/basic-elements') ? 'nav-link active' : 'nav-link' } to="/form-elements/basic-elements"> CBD Norte </Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/form-elements/basic-elements') ? 'nav-link active' : 'nav-link' } to="/form-elements/basic-elements"> CBD Centro </Link></li>
-                <li className="nav-item"> <Link className={ this.isPathActive('/form-elements/basic-elements') ? 'nav-link active' : 'nav-link' } to="/form-elements/basic-elements"> CBD Sul </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/bomdia/cbdnorte') ? 'nav-link active' : 'nav-link' } to="/dashboard/bomdia/cbdnorte"> CBD Norte </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/bomdia/cbdcentro') ? 'nav-link active' : 'nav-link' } to="/dashboard/bomdia/cbdcentro"> CBD Centro </Link></li>
+                <li className="nav-item"> <Link className={ this.isPathActive('/dashboard/bomdia/cbdsul') ? 'nav-link active' : 'nav-link' } to="/dashboard/bomdia/cbdsul"> CBD Sul </Link></li>
               </ul>
             </Collapse>
           </li>

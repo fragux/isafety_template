@@ -14,20 +14,32 @@ export class Dashboard extends Component {
     this.state = {
       loja: [{}],
     };
+    this.getLoja = this.getLoja.bind(this);
   }
 
   async componentDidMount() {
-    let rotaApi = "/app/loja";
+   this.getLoja();
+  }
+
+  
+  async componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+     this.getLoja();
+    }
+  }
+  
+  async getLoja(){
+    let rotaApi = "/app";
     const location = this.props.location;
     console.log("Rota pelo menu: ", location.pathname);
 
-    await api.get(rotaApi).then((response) => {
-      console.log("Retorno do servidor:", response.data);
+    await api.get(rotaApi+location.pathname).then((response) => {
+      //console.log("Retorno do servidor:", response.data);
       this.setState({ loja: response.data });
     });
   }
-
   render() {
+
     return (
       <>
         <div>

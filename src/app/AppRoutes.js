@@ -35,6 +35,14 @@ class AppRoutes extends Component {
           <Route path="/dashboard/continente/cntcentro" component={ Dashboard } />
           <Route path="/dashboard/continente/cntsul" component={ Dashboard } />
 
+          <Route path="/dashboard/modelo/cmnorte" component={ Dashboard } />
+          <Route path="/dashboard/modelo/cmcentro" component={ Dashboard } />
+          <Route path="/dashboard/modelo/cmsul" component={ Dashboard } />
+
+          <Route path="/dashboard/bomdia/cbdnorte" component={ Dashboard } />
+          <Route path="/dashboard/bomdia/cbdcentro" component={ Dashboard } />
+          <Route path="/dashboard/bomdia/cbdsul" component={ Dashboard } />
+
           <Route path="/tables/basic-table" component={ BasicTable } />
           
           <Route path="/form-Elements/basic-elements" component={ BasicElements } />
