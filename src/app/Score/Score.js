@@ -1,8 +1,10 @@
 import React, { useEffect,  forwardRef} from "react";
 import MaterialTable from "material-table";
-
+import { Link } from "react-router-dom";
+import { ProgressBar } from "react-bootstrap";
 import {
   AddBox,
+  AddCircle,
   ArrowDownward,
   Check,
   ChevronLeft,
@@ -50,12 +52,13 @@ function Score({loja}) {
     {
       title: "Risco",
       field: "Nivel_risco",
+      defaultSort: "desc",
       //style: { textAlign: "right" },
       render: (rowData) => {
         if(rowData.Nivel_risco > 0.80 )
-               return <h4 style={{ width: 50, color: "red" }}>{rowData.Nivel_risco}</h4>
-        else  if(rowData.Nivel_risco < 0.4 ) return <h4 style={{ width: 50, color: "green" }}>{rowData.Nivel_risco}</h4>
-        else return <h4 style={{ width: 50, color: "orange" }}>{rowData.Nivel_risco}</h4>
+               return  <ProgressBar variant="danger" now={rowData.Nivel_risco*100}/>
+        else  if(rowData.Nivel_risco < 0.4 ) return <ProgressBar variant="success" now={rowData.Nivel_risco*100}/>
+        else return <ProgressBar variant="warning" now={rowData.Nivel_risco*100}/>
       },
       validate: (rowData) => rowData.Nivel_risco > 0.0,
     },
@@ -92,7 +95,23 @@ function Score({loja}) {
   return (
     <>
       <MaterialTable
-    
+      localization={{
+        pagination: {
+            labelDisplayedRows: '{from}-{to} of {count}'
+        },
+        toolbar: {
+            nRowsSelected: '{0} row(s) selected'
+        },
+        header: {
+            actions: 'Ver +'
+        },
+        body: {
+            emptyDataSourceMessage: 'No records to display',
+            filterRow: {
+                filterTooltip: 'Filter'
+            }
+        }
+    }}
         style={{ padding: "0 8px", borderRadius: "0.5rem", boxShadow: "none" }}
         minRows={10}
         icons={tableIcons}
@@ -124,21 +143,25 @@ function Score({loja}) {
             background: "lightgrey",
             color: "white",
           },
-         
+          sorting: true,
+        
           paging: true,
           search: true,
           //exportButton: true,
           //doubleHorizontalScroll: true
           //addRowPosition: true,
         }}
-        /*actions={[
+        actions={[
             {
-             title: 'Go To',
-              icon: '>',
-              tooltip: <b>'Ligação para a loja'</b>,
-              onClick: () => window.open('http://localhost:5000/files/blank').focus()
+              icon: () => <AddCircle style={{color: 'dodgerblue'}}/>,
+              tooltip: <b>Ligação para a loja</b>,
+              onClick: (event, rowData) => {
+                console.log(" link para a loja: ", rowData._id);
+                <Link to={`/dashboard/loja/:${rowData._id}`}>Ver Mais</Link>
+                //window.open(`/dashboard/loja/:${rowData._id}`).focus() 
+              }
             }
-          ]}*/
+          ]}
       />
     </>
   );

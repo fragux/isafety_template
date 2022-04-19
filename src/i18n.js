@@ -177,8 +177,8 @@ i18n
     debug: true,
 
     // have a common namespace used around the full app
-    ns: ["translations"],
-    defaultNS: "translations",
+    ns: "translation",
+    defaultNS: "translation",
 
     keySeparator: false, // we use content as keys
 

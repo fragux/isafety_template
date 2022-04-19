@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import L from "leaflet";
+import L, { map } from "leaflet";
 import {
   MapContainer,
   TileLayer,
@@ -24,6 +24,7 @@ import markerUnavailable from "../../assets/Markers/markerUnavailable.png";
 import VectorBasemapLayer from "react-esri-leaflet/plugins/VectorBasemapLayer";
 
 import distritos from "../../assets/CoordenadasDistritos/coordendas.json";
+import { ProgressBar } from "react-bootstrap";
 
 function getIcon(risco, disponibilidade) {
   let marker;
@@ -154,6 +155,27 @@ function calculoRiscoLoja(lojas) {
   } else return risco;
 }
 
+function LocationMarker() {
+  const [position, setPosition] = useState(null);
+  const [markerSize, setMarkerSize] = useState();
+  const map = useMapEvents({
+    click(e) {
+      map.locate();
+      console.log("Latitude e longitude do click do rato: ", e.latlng);
+      //getClick(e.latlng);
+      map.flyTo(e.latlng, 10);
+      if (map.getZoom() > 9) setMarkerSize(10);
+      else setMarkerSize(5);
+    },
+    locationfound(e) {
+      setPosition(e.latlng);
+      //map.flyTo( e.latlng, 10);
+    },
+  });
+  console.log("Tamanho do marker: ", markerSize);
+  return null;
+}
+
 const paraCadaUm = (distrito, layer) => {
   //const NomeDistrito = distrito.nome;
   //const map = this.mapRef.current;
@@ -191,7 +213,7 @@ const paraCadaUm = (distrito, layer) => {
 
         //getMapBounds(markerBounds);
         //zoomToFeature();
-        //   var map = L.map('map');
+        //  var map = L.map('map');
         // L.map.fitBounds(markerBounds);
 
         // if (map) map.leafletElement.fitBounds(distrito.getBounds());
@@ -200,6 +222,13 @@ const paraCadaUm = (distrito, layer) => {
     },
   });
 };
+function renderRisco(value) {
+  if (value > 0.8)
+    return <ProgressBar variant="danger" now={parseFloat(value) * 100} />;
+  else if (value < 0.35)
+    return <ProgressBar variant="success" now={parseFloat(value) * 100} />;
+  else return <ProgressBar variant="warning" now={parseFloat(value) * 100} />;
+}
 
 function Mapa({ loja }) {
   const [lojas, setLojas] = useState([]);
@@ -250,7 +279,9 @@ function Mapa({ loja }) {
           if (
             continente.Insignia === "ContinenteBomDia" ||
             continente.Insignia === "Continente" ||
-            continente.Insignia === "ContinenteModelo"
+            continente.Insignia === "ContinenteModelo" ||
+            continente.Insignia === "Continente Bom Dia" ||
+            continente.Insignia === "Continente Modelo"
           )
             return (
               <Marker
@@ -282,22 +313,31 @@ function Mapa({ loja }) {
                     <br />
                     {"Concelho" + ": " + continente.Concelho}
                   </p>
-                  <p>
-                    {"Nível de Risco" + ": "}
-                    <b style={{ color: "red" }}>{continente.Nivel_risco}</b>
-                  </p>
-
-                  <Link to={`/dashboard/loja/:${continente._id}`}>
-                    Ver Mais
-                  </Link>
+                  <p>{"Nível de Risco : " + continente.Nivel_risco}</p>
+                  <div>
+                    <button
+                      type="button"
+                      className="col-12 btn btn-primary btn-rounded btn-fw"
+                    >
+                      <Link
+                        to={`/dashboard/loja/:${continente._id}`}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
+                        Ver loja
+                      </Link>
+                    </button>
+                  </div>
                 </Popup>
-                <Tooltip direction="right" offset={[0, -2]} opacity={1} style={{"visible": true}}>
-                  <br />
-                  <ul className="list-star">
-                    <li>
-                      <b>{continente.Nome}</b>
-                    </li>
-                  </ul>
+                <Tooltip direction="top" offset={[0, 0]} opacity={1}>
+                  <div style={{ padding: "0rem", paddingRight: "1rem" }}>
+                    <br />
+                    <ul className="list-star">
+                      <li>
+                        <b>{continente.Nome}</b>
+                        <div>{renderRisco(continente.Nivel_risco)}</div>
+                      </li>
+                    </ul>
+                  </div>
                 </Tooltip>
               </Marker>
             );

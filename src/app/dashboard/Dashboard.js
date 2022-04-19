@@ -6,6 +6,7 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import Mapa from "../Mapa/Mapa.js";
 import api from "../../Services/api";
 import Score from "../Score/Score.js";
+//import { useLocation } from 'react-router-dom';
 
 export class Dashboard extends Component {
   constructor(props) {
@@ -17,6 +18,8 @@ export class Dashboard extends Component {
 
   async componentDidMount() {
     let rotaApi = "/app/loja";
+    const location = this.props.location;
+    console.log("Rota pelo menu: ", location.pathname);
 
     await api.get(rotaApi).then((response) => {
       console.log("Retorno do servidor:", response.data);
@@ -28,8 +31,9 @@ export class Dashboard extends Component {
     return (
       <>
         <div>
+          
           <div className="row " style={{marginRight: "0rem"}}>
-            <div className="col-xl-5 col-lg-12 col-sm-12 grid-margin stretch-card">
+            <div className="col-xl-5 col-lg-12 col-sm-12 grid-margin stretch-card"  style={{marginRight: "0rem"}}>
               <div className="card rounded">
                 {console.log("Estado da loja:", this.state.loja)}
                 <Mapa loja={this.state.loja} />

@@ -5,6 +5,9 @@ const signUpTemplateCopy = require("../models/SignUpModels");
 const lojaDataCopy = require("../models/Loja");
 const bcrypt = require("bcrypt");
 
+router.use(express.json({extended:true}));
+
+
 router.post("/signup", async (request, response) => {
   const saltPassword = await bcrypt.genSalt(10);
   const securePassword = await bcrypt.hash(request.body.password, saltPassword);
@@ -95,6 +98,39 @@ router.get("/loja/:id", async (req, res) => {
   }
 });
 
+/*
+//get para buscar apenas as lojas com o insignia especifico
+router.get("/loja/cadeia/:cadeia", function(req, res) {
+  var query = req.params.cadeia;
+  console.log("Query activated!!!!")
+  lojaDataCopy.find({
+      'request': query
+  }, function(err, result) {
+      if (err) throw err;
+      if (result) {
+          res.json(result)
+      } else {
+          res.send(JSON.stringify({
+              error : 'Error'
+          }))
+      }
+  })
+})*/
+
+router.get("/loja/cadeia/:cadeia",function(req,res,next){
+  console.log("Port 3000 - Query: ", req.params.cadeia);
+  lojaDataCopy.find({Cadeia: req.params.cadeia}).then(function(lojas){
+      res.send(lojas);
+  }).catch(next);
+});
+/*
+router.route('/loja/:id')
+    .get((req, res) => {
+        lojaDataCopy.findById(req.params.id, (err, loja) => {
+            res.json(loja)
+        })  
+    })*/
+
 //este patch atualiza apenas uma loja
 router.patch("/loja/:id", async (req, res) => {
   const id = req.params.id;
@@ -176,25 +212,11 @@ router.delete("/loja/:id", async (req, res) => {
   }
 });
 
-//get para buscar apenas as lojas com o insignia especifico
-router.get("/loja/id/:Cadeia", async (req, res) => {
-  const Cadeia = req.params.Cadeia;
 
-  try {
-    const getInsignia = await lojaDataCopy.find({ Cadeia }, "");
 
-    if (!getInsignia) {
-      res.status(422).json({ message: "Insignia não encontrada!" });
-      return;
-    }
 
-    res.status(200).json(getInsignia);
-  } catch (error) {
-    res.status(500).json({ erro: error });
-  }
-});
 
-router.get("/dashboard/:Cadeia", async (req, res) => {
+/*router.get("/dashboard/:Cadeia", async (req, res) => {
   const Cadeia = req.query.Cadeia;
 
   try {
@@ -209,6 +231,21 @@ router.get("/dashboard/:Cadeia", async (req, res) => {
   } catch (error) {
     res.status(500).json({ erro: error });
   }
-});
+});*/
+
+/*
+router.get("/dashboard/:cadeia", async (req, res) => {
+  try {
+    const loja = await lojaDataCopy.find({ Cadeia: req.query.cadeia });
+    if(!loja) {
+
+    res.status(422).json({ message: "Insignia não encontrada!" });
+    return;
+  }
+    res.status(200).json(loja);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});*/
 
 module.exports = router;
