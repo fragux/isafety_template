@@ -158,8 +158,8 @@ function Score({loja}) {
               tooltip: <b>Ligação para a loja</b>,
               onClick: (event, rowData) => {
                 console.log(" link para a loja: ", rowData._id);
-                <Link to={`/dashboard/loja/:${rowData._id}`}>Ver Mais</Link>
-                //window.open(`/dashboard/loja/:${rowData._id}`).focus() 
+                <Link to={`/Loja/loja/${rowData._id}`}>Ver Mais</Link> 
+                window.open(`/Loja/loja/${rowData._id}`).focus() 
               }
             }
           ]}

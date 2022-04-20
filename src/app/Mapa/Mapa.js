@@ -313,7 +313,7 @@ function Mapa({ loja }) {
                       className="col-12 btn btn-primary btn-rounded btn-fw"
                     >
                       <Link
-                        to={`/dashboard/loja/:${continente._id}`}
+                        to={`/Loja/loja/${continente._id}`}
                         style={{ color: "white", textDecoration: "none" }}
                       >
                         Ver loja
