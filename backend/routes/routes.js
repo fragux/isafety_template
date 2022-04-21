@@ -298,14 +298,26 @@ router.post("/submetealgoritmo", async (req, res) => {
     
 });
 
-router.get("/algoritmo", async (request, res) => {
-  try {
-    const data = await saidaalgoritmo.find();
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ erro: error });
-  }
+router.get("/algoritmo", async (req, res) => {
+ 
+    const data = await saidaalgoritmo.find({});
+    return response.json(data);
+  });
+
+
+
+
+//teste
+router.get("/algoritmo/saida/:idloja", function (req, res, next) {
+  console.log("Port 3000 - Query: ", req.params.idloja);
+  saidaalgoritmo
+    .find({ LojaId: req.params.idloja })
+    .then(function (lojas) {
+      res.send(lojas);
+    })
+    .catch(next);
 });
+
 
 router.delete("/algoritmo/:id", async (req, res) => {
   const id = req.params._id;

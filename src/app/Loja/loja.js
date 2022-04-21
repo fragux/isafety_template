@@ -49,8 +49,22 @@ export class Loja extends Component {
                 Disponivel: loja.Disponivel,
                 Nivel_risco: loja.Nivel_risco,
                 dataAlgoritmo:loja.dataAlgoritmo,
+                Seccao:loja.dataAlgoritmo.Seccao,
                 })
-            })/*
+               
+            })
+            
+            axios.get(`http://127.0.0.1:3000/app/algoritmo/saida`+ rotan )
+            .then(res => {
+                const loja = res.data;
+                this.setState({loja});
+                this.setState({
+                  Nivel_risco2: loja.Nivel_risco2,
+                  
+                  SaidaAlgoritmo:loja.SaidaAlgoritmo,
+                  
+                  })
+              })/*
           try{
     let response = await fetch('http://127.0.0.1:3000/app' + rota , {
             method: 'GET',
@@ -79,10 +93,10 @@ export class Loja extends Component {
         
 
 }
-  
+
 
   render() {
-    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, loja} = this.state;
+    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, loja, Seccao} = this.state;
     return (
       
        
@@ -103,7 +117,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#335675",backgroundColor:"#CB3130"}} className="textoCartoes">
-             45%
+             {Seccao}
            </h1>
                        
                         </div>
