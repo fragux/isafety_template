@@ -59,7 +59,7 @@ function Score({loja}) {
         if(rowData.Nivel_risco > 0.80 )
                return  <ProgressBar variant="danger" now={rowData.Nivel_risco*100}/>
         else  if(rowData.Nivel_risco < 0.4 ) return <ProgressBar variant="success" now={rowData.Nivel_risco*100}/>
-        else return <ProgressBar variant="warning" now={rowData.Nivel_risco*100}/>
+        else if(rowData.Nivel_risco >= 0.4 && rowData.Nivel_risco <= 0.8) return <ProgressBar variant="warning" now={rowData.Nivel_risco*100}/>
       },
       validate: (rowData) => rowData.Nivel_risco > 0.0,
     },
@@ -153,15 +153,14 @@ function Score({loja}) {
           //addRowPosition: true,
         }}
         actions={[
-            {
-              icon: () => <AddCircle style={{color: 'dodgerblue'}}/>,
+            rowData => ({
+              icon: () => <Link to={`/Loja/loja/${rowData._id}`}><AddCircle style={{color: 'dodgerblue'}}/></Link> ,
               tooltip: <b>Ligação para a loja</b>,
               onClick: (event, rowData) => {
-                console.log(" link para a loja: ", rowData._id);
-                <Link to={`/Loja/loja/${rowData._id}`}>Ver Mais</Link> 
-                window.open(`/Loja/loja/${rowData._id}`).focus() 
+                console.log(" link para a loja: ", rowData._id);              
+              //window.open(`/Loja/loja/${rowData._id}`).focus() 
               }
-            }
+            })
           ]}
       />
     </>

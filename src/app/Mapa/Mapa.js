@@ -1,21 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import L, { map } from "leaflet";
+import React, { useState, useEffect } from "react";
+import L from "leaflet";
 import {
   MapContainer,
   TileLayer,
   Marker,
   Popup,
   GeoJSON,
-  Circle,
   Tooltip,
   useMapEvents,
 } from "react-leaflet";
 //import MarkerClusterGroup from "react-leaflet-markercluster";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "mapbox-gl/dist/mapbox-gl.css";
-
+import "leaflet-loading";
 import "./Mapa.css";
-import api from "../../Services/api";
+//import api from "../../Services/api";
 
 import markerVerde from "../../assets/Markers/markerVerde.png";
 import markerAmarelo from "../../assets/Markers/markerAmarelo.png";
@@ -29,9 +28,9 @@ import { ProgressBar } from "react-bootstrap";
 function getIcon(risco, disponibilidade) {
   let marker;
   let markerSize;
-  let numero = 0;
+  
   if (!risco) {
-    numero += numero;
+    
     //console.log("Risco indisponível:", numero);
     marker = markerUnavailable;
     markerSize = 4;
@@ -39,7 +38,7 @@ function getIcon(risco, disponibilidade) {
     console.log("Risco <0.5 : ", risco);
     marker = markerVerde;
     markerSize = 10;
-  } else if (risco <= 0.88 && risco > 0.3) {
+  } else if (risco <= 0.80 && risco > 0.3) {
     console.log("Risco <0.88 : ", risco);
     marker = markerAmarelo;
     markerSize = 14;
@@ -58,7 +57,7 @@ function getIcon(risco, disponibilidade) {
   });
 }
 
-function getIconOver(risco, zoomValue) {
+/*function getIconOver(risco, zoomValue) {
   let marker;
   let markerSize;
   if (risco < 0.5) {
@@ -84,7 +83,7 @@ function getIconOver(risco, zoomValue) {
     popupAnchor: [0, -20], // move o popup [direita, baixo],
   });
 }
-
+*/
 /*const createClusterCustomIcon = function (cluster) {
   //Falta criar aqui uma forma de alterar a cor com base no interior do cluster
   return L.divIcon({
@@ -102,7 +101,7 @@ function getMapBounds(bounds) {
 /*const zoomToFeature = ((e) => {
   // update this to work with react-leaflet 3 and functional react components
   e.fitBounds(e.target.getBounds());
-})*/
+})
 
 function calculoRisco(lojas) {
   let resultado = 0;
@@ -112,7 +111,7 @@ function calculoRisco(lojas) {
     console.log("Valor do resultado:", resultado / length);
     return resultado / length;
   } else return 0;
-}
+}*/
 
 function calculoRiscoLoja(lojas) {
   const risco = {
@@ -125,6 +124,10 @@ function calculoRiscoLoja(lojas) {
     moderado: 0,
     leve: 0,
   };
+  const resultado = {
+    risco: risco,
+    count: count,
+  }
 
   let length = lojas.length;
   if (length !== 0) {
@@ -134,11 +137,11 @@ function calculoRiscoLoja(lojas) {
         count.leve++;
       } else if (
         parseFloat(Nivel_risco) > 0.3 &&
-        parseFloat(Nivel_risco) <= 0.6
+        parseFloat(Nivel_risco) <= 0.8
       ) {
         risco.moderado++;
         count.moderado++;
-      } else if (parseFloat(Nivel_risco) > 0.6) {
+      } else if (parseFloat(Nivel_risco) > 0.8) {
         risco.alto++;
         count.alto++;
       }
@@ -151,10 +154,10 @@ function calculoRiscoLoja(lojas) {
     if (count.alto === 0) risco.alto = risco.alto / 1;
     else risco.alto = risco.alto / total;
     console.log("Valor do resultado:", risco);
-    return risco;
-  } else return risco;
+    return (resultado);
+  } else return (resultado);
 }
-
+/*
 function LocationMarker() {
   const [position, setPosition] = useState(null);
   const [markerSize, setMarkerSize] = useState();
@@ -174,7 +177,7 @@ function LocationMarker() {
   });
   console.log("Tamanho do marker: ", markerSize);
   return null;
-}
+}*/
 
 const paraCadaUm = (distrito, layer) => {
   //const NomeDistrito = distrito.nome;
@@ -210,6 +213,7 @@ const paraCadaUm = (distrito, layer) => {
         console.log("Distrito de: ", distrito.nome);
         var markerBounds = L.latLngBounds(distrito.coordinates[0]);
         console.log("Marker Bounds: ", markerBounds);
+        
 
         //getMapBounds(markerBounds);
         //zoomToFeature();
@@ -219,7 +223,7 @@ const paraCadaUm = (distrito, layer) => {
         // if (map) map.leafletElement.fitBounds(distrito.getBounds());
         // this.refs.map.distrito.coordinates[0].fitBounds(event.target.getBounds());
       }
-    },
+    }
   });
 };
 function renderRisco(value) {
@@ -230,8 +234,7 @@ function renderRisco(value) {
   else return <ProgressBar variant="warning" now={parseFloat(value) * 100} />;
 }
 
-function Mapa({ loja }) {
- 
+const Mapa = ({ loja, mapaToDashboard }) => {
   function getClick(event) {
     console.log("Está a clicar", event.latlng.lat);
     const codigo = loja.find(
@@ -242,16 +245,27 @@ function Mapa({ loja }) {
     //if (codigo) props.callBackCodigoLoja(codigo._id, codigo.CodigoLoja);
   }
 
+  useEffect(() => {
+     
+    const resultado = calculoRiscoLoja(loja);
+    console.log("Risco com count:", resultado);
+    if (loja) {
+     mapaToDashboard(resultado.risco.alto, resultado.risco.moderado, resultado.risco.leve, resultado.count.alto, resultado.count.moderado, resultado.count.leve);
+    }
+  
+  }, [loja, mapaToDashboard]);
+
   return (
     <>
       <MapContainer
+        loadingControl={true}
         center={[39.6, -8]}
         zoom={7}
         scrollWheelZoom={true}
         minZoom={7}
         doubleClickZoom={false}
         className="leaflet-container"
-        key={new Date().getTime()}
+        
       >
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
@@ -268,7 +282,7 @@ function Mapa({ loja }) {
           />
         }
 
-        {loja.map((continente, i) => {
+        {loja?.map((continente, i) => {
           if (
             continente.Insignia === "ContinenteBomDia" ||
             continente.Insignia === "Continente" ||

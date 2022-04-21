@@ -1,4 +1,5 @@
 @import url("~leaflet/dist/leaflet.css");
+/*@import url("~leaflet-loading/src/Control.Loading.css");*/
 
 .leaflet-container {
   width: 100%;

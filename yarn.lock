@@ -30,7 +30,7 @@
   "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.17.7.tgz"
   "version" "7.17.7"
 
-"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.1.0", "@babel/core@^7.11.1", "@babel/core@^7.12.0", "@babel/core@^7.12.3", "@babel/core@^7.13.0", "@babel/core@^7.15.5", "@babel/core@^7.16.0", "@babel/core@^7.4.0-0", "@babel/core@^7.7.2", "@babel/core@^7.8.0", "@babel/core@>=7.11.0":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.1.0", "@babel/core@^7.11.1", "@babel/core@^7.12.0", "@babel/core@^7.12.3", "@babel/core@^7.13.0", "@babel/core@^7.15.5", "@babel/core@^7.16.0", "@babel/core@^7.17.9", "@babel/core@^7.4.0-0", "@babel/core@^7.7.2", "@babel/core@^7.8.0", "@babel/core@>=7.11.0":
   "integrity" "sha512-5ug+SfZCpDAkVp9SFIZAzlW18rlzsOcJGaetCjkySnrXXDUw9AR8cDUm1iByTmdWM6yxX6/zycaV76w3YTF2gw=="
   "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.17.9.tgz"
   "version" "7.17.9"
@@ -897,7 +897,7 @@
     "@babel/helper-create-regexp-features-plugin" "^7.16.7"
     "@babel/helper-plugin-utils" "^7.16.7"
 
-"@babel/preset-env@^7.11.0", "@babel/preset-env@^7.12.1", "@babel/preset-env@^7.16.4":
+"@babel/preset-env@^7.11.0", "@babel/preset-env@^7.12.1", "@babel/preset-env@^7.16.11", "@babel/preset-env@^7.16.4":
   "integrity" "sha512-qcmWG8R7ZW6WBRPZK//y+E3Cli151B20W1Rv7ln27vuPaXU/8TKms6jFdiJtF7UDTxcrb7mZd88tAeK9LjdT8g=="
   "resolved" "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.16.11.tgz"
   "version" "7.16.11"
@@ -988,7 +988,7 @@
     "@babel/types" "^7.4.4"
     "esutils" "^2.0.2"
 
-"@babel/preset-react@^7.12.5", "@babel/preset-react@^7.16.0":
+"@babel/preset-react@^7.12.5", "@babel/preset-react@^7.16.0", "@babel/preset-react@^7.16.7":
   "integrity" "sha512-fWpyI8UM/HE6DfPBzD8LnhQ/OcH8AgTaqcqP2nGOXEUV+VKBR5JRN9hCk9ai+zQQ57vtm9oWeXguBCPNUjytgA=="
   "resolved" "https://registry.npmjs.org/@babel/preset-react/-/preset-react-7.16.7.tgz"
   "version" "7.16.7"
@@ -1614,9 +1614,9 @@
   "version" "1.4.11"
 
 "@jridgewell/trace-mapping@^0.3.0":
-  "integrity" "sha512-vFv9ttIedivx0ux3QSjhgtCVjPZd5l46ZOMDSCwnH1yUO2e964gO8LZGyv2QkqcgR6TnBU1v+1IFqmeoG+0UJQ=="
-  "resolved" "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.4.tgz"
-  "version" "0.3.4"
+  "integrity" "sha512-zdpaWDz5IEyHlu1EO+B+qRHmJkSxMVV6SXngDry9n1ZqslLXFH9Dw6lRqDidm/sOJAWdRltJsmZ1SK28/uZKsw=="
+  "resolved" "https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.8.tgz"
+  "version" "0.3.8"
   dependencies:
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
@@ -2358,6 +2358,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/history@^4.7.11":
+  "integrity" "sha512-qjDJRrmvBMiTx+jyLxvLfJU7UznFuokDv4f3WRuriHKERccVpFU+8XMQUAbDzoiJCsmexxRExQeMwwCdamSKDA=="
+  "resolved" "https://registry.npmjs.org/@types/history/-/history-4.7.11.tgz"
+  "version" "4.7.11"
+
 "@types/hoist-non-react-statics@^3.3.0", "@types/hoist-non-react-statics@^3.3.1":
   "integrity" "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA=="
   "resolved" "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz"
@@ -2412,7 +2417,14 @@
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   "version" "0.0.29"
 
-"@types/leaflet@^1.7.9":
+"@types/leaflet-loading@^0.1.1":
+  "integrity" "sha512-yecbCvdrQyDTcTzZ4MfbVDtmvrdLdXZUbJfOHUXkb5Qf6RHpDBak1S/ZJUbG9imGhCgabp4KVY+3X63SueF9Yw=="
+  "resolved" "https://registry.npmjs.org/@types/leaflet-loading/-/leaflet-loading-0.1.1.tgz"
+  "version" "0.1.1"
+  dependencies:
+    "@types/leaflet" "*"
+
+"@types/leaflet@*", "@types/leaflet@^1.7.9":
   "integrity" "sha512-H8vPgD49HKzqM41ArHGZM70g/tfhp8W+JcPxfnF+5H/Xvp+xiP+KQOUNWU8U89fqS1Jj3cpRY/+nbnaHFzwnFA=="
   "resolved" "https://registry.npmjs.org/@types/leaflet/-/leaflet-1.7.9.tgz"
   "version" "1.7.9"
@@ -2507,6 +2519,23 @@
     "@types/react" "*"
     "hoist-non-react-statics" "^3.3.0"
     "redux" "^4.0.0"
+
+"@types/react-router-dom@^5.3.3":
+  "integrity" "sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw=="
+  "resolved" "https://registry.npmjs.org/@types/react-router-dom/-/react-router-dom-5.3.3.tgz"
+  "version" "5.3.3"
+  dependencies:
+    "@types/history" "^4.7.11"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  "integrity" "sha512-YYknwy0D0iOwKQgz9v8nOzt2J6l4gouBmDnWqUUznltOTaon+r8US8ky8HvN0tXvc38U9m6z/t2RsVsnd1zM0g=="
+  "resolved" "https://registry.npmjs.org/@types/react-router/-/react-router-5.1.18.tgz"
+  "version" "5.1.18"
+  dependencies:
+    "@types/history" "^4.7.11"
+    "@types/react" "*"
 
 "@types/react-table@^6.8.5":
   "integrity" "sha512-fVQXjy/EYDbgraScgjDONA291McKqGrw0R0NeK639fx2bS4T19TnXMjg3FjOPlkI3qYTQtFTPADlRYysaQIMpA=="
@@ -3346,10 +3375,10 @@
     "graceful-fs" "^4.2.9"
     "slash" "^3.0.0"
 
-"babel-loader@^8.2.3":
-  "integrity" "sha512-8dytA3gcvPPPv4Grjhnt8b5IIiTcq/zeXOPk4iTYI0SVXcsmuGg7JtBRDp8S9X+gJfhQ8ektjXZlDu1Bb33U8A=="
-  "resolved" "https://registry.npmjs.org/babel-loader/-/babel-loader-8.2.4.tgz"
-  "version" "8.2.4"
+"babel-loader@^8.2.3", "babel-loader@^8.2.5":
+  "integrity" "sha512-OSiFfH89LrEMiWd4pLNqGz4CwJDtbs2ZVc+iGu2HrkRfPxId9F2anQj38IxWpmRfsUY0aBZYi1EFcd3mhtRMLQ=="
+  "resolved" "https://registry.npmjs.org/babel-loader/-/babel-loader-8.2.5.tgz"
+  "version" "8.2.5"
   dependencies:
     "find-cache-dir" "^3.3.1"
     "loader-utils" "^2.0.0"
@@ -3446,6 +3475,11 @@
   "version" "0.3.1"
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.3.1"
+
+"babel-plugin-react-html-attrs@^3.0.5":
+  "integrity" "sha512-o6RClilXl0T7HfVsHUE+xHV0HMBX0SzB94MMIrT52089CA6Sd4eXkY7jLHknQktFQ5UHpSXYPP0x7fUnIY97Qg=="
+  "resolved" "https://registry.npmjs.org/babel-plugin-react-html-attrs/-/babel-plugin-react-html-attrs-3.0.5.tgz"
+  "version" "3.0.5"
 
 "babel-plugin-react-svg@^3.0.3":
   "integrity" "sha512-Pst1RWjUIiV0Ykv1ODSeceCBsFOP2Y4dusjq7/XkjuzJdvS9CjpkPMUIoO4MLlvp5PiLCeMlsOC7faEUA0gm3Q=="
@@ -7968,6 +8002,11 @@
   dependencies:
     "npm" "^2.5.1"
 
+"leaflet-loading@^0.1.24":
+  "integrity" "sha1-6v38GIcY6xPTz3uSJsTAaxbpKRk="
+  "resolved" "https://registry.npmjs.org/leaflet-loading/-/leaflet-loading-0.1.24.tgz"
+  "version" "0.1.24"
+
 "leaflet.heat@^0.2.0":
   "integrity" "sha1-EJ2M9Ybwre5B8Fr/Ax4np3/swik="
   "resolved" "https://registry.npmjs.org/leaflet.heat/-/leaflet.heat-0.2.0.tgz"
@@ -10404,7 +10443,7 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.21.0"
 
-"react-double-scrollbar@0.0.15":
+"react-double-scrollbar@^0.0.15", "react-double-scrollbar@0.0.15":
   "integrity" "sha1-6RWrjLO5WYdwdfSUNt6/2wQoj+Q="
   "resolved" "https://registry.npmjs.org/react-double-scrollbar/-/react-double-scrollbar-0.0.15.tgz"
   "version" "0.0.15"
