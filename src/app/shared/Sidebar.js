@@ -191,7 +191,7 @@ class Sidebar extends Component {
             </div>
           </li>
           */}
-          <li className="nav-item sidebar-user-actions">
+          <li className="nav-item sidebar-user-actions mt-5">
             <div className="sidebar-user-menu">
               <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-settings menu-icon"></i>
                 <span className="menu-title"> Definições </span>

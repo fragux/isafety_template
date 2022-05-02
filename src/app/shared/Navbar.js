@@ -11,8 +11,8 @@ class Navbar extends Component {
   render () {
     return (
       <nav className="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row" >
-        <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style={{backgroundColor:"#3774a9"}}>
-          <Link className="navbar-brand brand-logo" to="/"><img src={require('../../assets/logo/_logo_isafety_full.png')} alt="logo" style={{width:150, height:39}}/></Link>
+        <div className="text-center navbar-brand-wrapper" style={{backgroundColor:"#3774a9"}}>
+          <Link className="navbar-brand brand-logo" to="/"><img src={require('../../assets/logo/_logo_isafety_full.png')} alt="logo" style={{width:150, height:39, marginLeft:"-2.5rem"}}/></Link>
           <Link className="navbar-brand brand-logo-mini" to="/"><img src={require('../../assets/logo/_logo_isafety_vector_white.png')} alt="logo"  style={{width:40, height:39}} /></Link>
         </div>
         <div className="navbar-menu-wrapper d-flex align-items-stretch">

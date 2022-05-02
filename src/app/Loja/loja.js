@@ -14,6 +14,7 @@ export class Loja extends Component {
     this.state={
       lojas: [],
       loja2:[],
+      algoritmo:[{}]
      
   }
 }
@@ -76,6 +77,7 @@ export class Loja extends Component {
                   var teste=res.data[0].SaidaAlgoritmo
                   var teste3=res.data[0].SaidaAlgoritmo.length
                   console.log("ola de novo",teste);
+                  this.setState({algoritmo: teste});
                   console.log("get2",teste[0].Seccao)
                   var teste2 = 0;
                  
@@ -103,22 +105,175 @@ export class Loja extends Component {
                  
              
              
-          
-       
-}
+                      
+                    }
+                    
+                    
+             calculoSeccao(){
+                      let copiedLoja = Object.assign([{}], this.state.algoritmo);
+                      let tamanho = copiedLoja.length;
+                      const numeroColabAcidente = [];
+                      const deepFilter = (obj, filter) => {
+                        //iterate the object
+                        for (let key in obj) {
+                          const val = obj[key].Seccao;
+                  
+                          //if val is also object (nested)
+                          if (val === "object") {
+                            //recur
+                            deepFilter(val, filter);
+                          }
+                          // normal value
+                          else {
+                            //current val fails filter condition
+                            //delete it
+                            if (filter(val) === false) {
+                              obj[key] = obj[key];
+                            }
+                          }
+                  
+                          //if value is empty obj
+                          //delete it
+                          if (JSON.stringify(val) === "{}") {
+                            delete obj[key];
+                          }
+                        }
+                      };
+                      const results = [];
+                      for (let i=1; i<=16; i++){
+                      deepFilter(copiedLoja, (s) => s === i);   
+                       results[i] = copiedLoja.filter((element) => {
+                        if (Object.keys(element).length !== 0) {
+                          return true;
+                        }
+                  
+                        return false;
+                      });
+                     // console.log( "Resultado secções: ", i,  results); 
+                    }
+                    /*const resultado =  loja.filter( filterLoja => {
+                        for (let i=0; i< loja.length ; i++)
+                        return (filterLoja.Seccao === i)}
+                        )*/
+                        const filterPerSection = (obj, filter) => {
+                          //iterate the object
+                          for (let key in obj) {
+                            const val = obj[key].Seccao;
+                    
+                            //if val is also object (nested)
+                            if (val === "object") {
+                              //recur
+                              filterPerSection(val, filter);
+                            }
+                            // normal value
+                            else {
+                              //current val fails filter condition
+                              //delete it
+                              if (filter(val) === false) {
+                                delete obj[key];
+                              }
+                            }
+                    
+                            //if value is empty obj
+                            //delete it
+                            if (JSON.stringify(val) === "{}") {
+                              delete obj[key];
+                            }
+                          }
+                        };
+                        const average = [];
+                        for (let i=1; i<=16; i++){
+                          
+                        filterPerSection(results[i], (s) => s === i);   
+                         average[i] = results[i].filter((element) => {
+                          if (Object.keys(element).length !== 0) {
+                            return true;
+                          }
+                    
+                          return false;
+                        });
+                        //console.log( "Resultado secções: ", i,  average); 
+                      }
+                      const filterSectionAc = (obj, filter) => {
+                        //iterate the object
+                        for (let key in obj) {
+                          const val = obj[key].Acidente;
+                  
+                          //if val is also object (nested)
+                          if (val === "object") {
+                            //recur
+                            filterSectionAc(val, filter);
+                          }
+                          // normal value
+                          else {
+                            //current val fails filter condition
+                            //delete it
+                            if (filter(val) === false) {
+                              delete obj[key];
+                            }
+                          }
+                  
+                          //if value is empty obj
+                          //delete it
+                          if (JSON.stringify(val) === "{}") {
+                            delete obj[key];
+                          }
+                        }
+                      };
+                      for (let i=1; i<=16; i++){
+                        numeroColabAcidente[i] = average[i].length;
+                      filterSectionAc(average[i], (s) => s === 1);
+                      }
+                      const averageAcidente = average;
+                      for (let j=1; j<=16; j++){
+                         averageAcidente[j] = averageAcidente[j].filter((element) => {
+                          if (Object.keys(element).length !== 0) {
+                            return true;
+                          }
+                    
+                          return false;
+                        });
+                       // console.log( "Resultado colaboradores em risco de acidente: ", j,  averageAcidente); 
+                      }
+                      //console.log("Prob. Acidente Colaborador = 1:", average);
+                      const averageresult = [] ;
+                      for(let i = 1; i<average.length; i++){
+                          averageresult[i-1]= {
+                           "Section" : i,
+                           "ColaboradoresAcidente": (average[i].length),
+                           "Colaboradores": (numeroColabAcidente[i]),
+                           "Average" : parseFloat(average[i].length / numeroColabAcidente[i])
+                          }
+                      } 
+                      //console.log("Risco de acidente por secção:", averageresult);
+                      //setData(averageresult);
+                      return averageresult
+                    }
 
+                    averageLoja(algoritmo){
+                      let resultado = 0;
+                      let count = 1;
+                      for(let i = 0; i < algoritmo.length; i++ ){
+                        if(isNaN(algoritmo[i].Average) === false && algoritmo[i].Average!==0){
+                        resultado = resultado + algoritmo[i].Average;  
+                        console.log("averageLoja: ", i, algoritmo[i].Average );
+                        count++; 
+                        }                       
+                      }
+                      console.log("Média loja:", resultado/count)
+                      return resultado/count
 
-
-  render() {
-    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, CodigoLoja,Nivel_risco,Seccao , lojas} = this.state;
+                    }
+                    
+   render() {
+   const probSeccao = this.calculoSeccao();
+   console.log("Objeto do algoritmo com probabilidade por secção: ", probSeccao);       
+   const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, CodigoLoja,Nivel_risco,Seccao , lojas} = this.state;
     const location = this.props.location;
     const rota= location.pathname;
     const rotan=rota.substring(10,rota.length);
-    return (
-      
-       
-       
-          <div className="row">
+    return (     
+       <div className="row">
           <div className="col-md-8 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
@@ -140,7 +295,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             {Nivel_risco }
+             {(probSeccao[6].Average +  probSeccao[7].Average + probSeccao[13].Average + probSeccao[11].Average + probSeccao[4].Average + probSeccao[4].Average).toFixed(2)*100}%
            </h1>
           
                         </div>
@@ -160,7 +315,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center',color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
+             - %
            </h1>
                         </div>
                         </Link>
@@ -180,7 +335,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
+                    {(probSeccao[1].Average +  probSeccao[9].Average).toFixed(2)*100}%
            </h1>
                         </div>
                         </Link>
@@ -200,7 +355,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
+                    {(probSeccao[12].Average).toFixed(2)*100}%
            </h1>
                         </div>
                         </Link>
@@ -220,7 +375,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
+                    {(probSeccao[14].Average).toFixed(2)*100}%
            </h1>
            </div>
            </Link>
@@ -240,7 +395,7 @@ export class Loja extends Component {
                  
                     <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
                     <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
+                    {(probSeccao[0].Average).toFixed(2)*100}%
            </h1>
            </div>
             </Link>
@@ -275,8 +430,8 @@ export class Loja extends Component {
               </div>
             </div>
           </div>
-          <div className="row">
-          <div className="col-md-11 grid-margin stretch-card">
+          <div className="row" style={{padding:"0 1rem 0 1rem"}}>
+          <div className="col-md-12 d-flex grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
               <h2  style={{ fontSize: 20,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675"}}> <img className="variaveis"  style={{width: 18}}  ></img> Nivel de risco geral</h2>
@@ -298,7 +453,8 @@ export class Loja extends Component {
                                     value={45}>
                                       <div>
                                         <i className="tt" style={{color:"#335675", fontfamily: 'Rubik',
-fontstyle: 'normal', textSizeAdjust:20}}>45%</i>
+fontstyle: 'normal', textSizeAdjust:20}}>{
+                                          this.averageLoja(probSeccao).toFixed(2)*100}%</i>
                                       </div>
                                     </CircularProgressbarWithChildren>
                                   </div> 

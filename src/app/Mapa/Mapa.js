@@ -28,9 +28,8 @@ import { ProgressBar } from "react-bootstrap";
 function getIcon(risco, disponibilidade) {
   let marker;
   let markerSize;
-  
+
   if (!risco) {
-    
     //console.log("Risco indisponível:", numero);
     marker = markerUnavailable;
     markerSize = 4;
@@ -38,7 +37,7 @@ function getIcon(risco, disponibilidade) {
     console.log("Risco <0.5 : ", risco);
     marker = markerVerde;
     markerSize = 10;
-  } else if (risco <= 0.80 && risco > 0.3) {
+  } else if (risco <= 0.8 && risco > 0.3) {
     console.log("Risco <0.88 : ", risco);
     marker = markerAmarelo;
     markerSize = 14;
@@ -127,7 +126,7 @@ function calculoRiscoLoja(lojas) {
   const resultado = {
     risco: risco,
     count: count,
-  }
+  };
 
   let length = lojas.length;
   if (length !== 0) {
@@ -154,8 +153,8 @@ function calculoRiscoLoja(lojas) {
     if (count.alto === 0) risco.alto = risco.alto / 1;
     else risco.alto = risco.alto / total;
     console.log("Valor do resultado:", risco);
-    return (resultado);
-  } else return (resultado);
+    return resultado;
+  } else return resultado;
 }
 /*
 function LocationMarker() {
@@ -213,7 +212,6 @@ const paraCadaUm = (distrito, layer) => {
         console.log("Distrito de: ", distrito.nome);
         var markerBounds = L.latLngBounds(distrito.coordinates[0]);
         console.log("Marker Bounds: ", markerBounds);
-        
 
         //getMapBounds(markerBounds);
         //zoomToFeature();
@@ -223,15 +221,46 @@ const paraCadaUm = (distrito, layer) => {
         // if (map) map.leafletElement.fitBounds(distrito.getBounds());
         // this.refs.map.distrito.coordinates[0].fitBounds(event.target.getBounds());
       }
-    }
+    },
   });
 };
 function renderRisco(value) {
   if (value > 0.8)
-    return <ProgressBar variant="danger" now={parseFloat(value) * 100} />;
+    return (
+      <ProgressBar
+        variant="danger"
+        now={parseFloat(value) * 100}
+        label={`${parseFloat(value) * 100}%`}
+        style={{ height: "14px" }}
+      />
+    );
   else if (value < 0.35)
-    return <ProgressBar variant="success" now={parseFloat(value) * 100} />;
-  else return <ProgressBar variant="warning" now={parseFloat(value) * 100} />;
+    return (
+      <ProgressBar
+        variant="success"
+        now={parseFloat(value) * 100}
+        label={`${parseFloat(value) * 100}%`}
+        style={{ height: "14px" }}
+      />
+    );
+  else if (value >= 0.35 && value <= 0.8)
+    return (
+      <ProgressBar
+        variant="warning"
+        now={parseFloat(value) * 100}
+        label={`${parseFloat(value) * 100}%`}
+        style={{ height: "14px" }}
+      />
+    );
+  else
+    return (
+      <ProgressBar
+        variant="primary"
+        now={parseFloat(0) * 100}
+        label={`${parseFloat(0) * 100}%`}
+        style={{ height: "14px" }}
+      />
+    );
 }
 
 const Mapa = ({ loja, mapaToDashboard }) => {
@@ -246,13 +275,18 @@ const Mapa = ({ loja, mapaToDashboard }) => {
   }
 
   useEffect(() => {
-     
     const resultado = calculoRiscoLoja(loja);
     console.log("Risco com count:", resultado);
     if (loja) {
-     mapaToDashboard(resultado.risco.alto, resultado.risco.moderado, resultado.risco.leve, resultado.count.alto, resultado.count.moderado, resultado.count.leve);
+      mapaToDashboard(
+        resultado.risco.alto,
+        resultado.risco.moderado,
+        resultado.risco.leve,
+        resultado.count.alto,
+        resultado.count.moderado,
+        resultado.count.leve
+      );
     }
-  
   }, [loja, mapaToDashboard]);
 
   return (
@@ -265,7 +299,6 @@ const Mapa = ({ loja, mapaToDashboard }) => {
         minZoom={7}
         doubleClickZoom={false}
         className="leaflet-container"
-        
       >
         <TileLayer
           attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
@@ -352,6 +385,6 @@ const Mapa = ({ loja, mapaToDashboard }) => {
       </MapContainer>
     </>
   );
-}
+};
 
 export default Mapa;

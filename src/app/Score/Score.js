@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef} from "react";
+import React, { useEffect, forwardRef } from "react";
 import MaterialTable from "material-table";
 import { Link } from "react-router-dom";
 import { ProgressBar } from "react-bootstrap";
@@ -22,20 +22,16 @@ import {
 } from "@material-ui/icons";
 import "./Score.css";
 
-function Score({loja}) {
-
-
+function Score({ loja }) {
   useEffect(() => {
     console.log("O que entra na tabela: ", loja);
-  
   }, [loja]);
-
 
   const columns = [
     {
       title: "Cadeia",
       field: "Cadeia",
-      validate: (rowData) => rowData.Cadeia==="Maxmat"
+      validate: (rowData) => rowData.Cadeia === "Maxmat",
     },
     {
       title: "Nome",
@@ -44,7 +40,6 @@ function Score({loja}) {
     {
       title: "DOP",
       field: "DOP",
-      
     },
     {
       title: "Distrito",
@@ -56,10 +51,33 @@ function Score({loja}) {
       defaultSort: "desc",
       //style: { textAlign: "right" },
       render: (rowData) => {
-        if(rowData.Nivel_risco > 0.80 )
-               return  <ProgressBar variant="danger" now={rowData.Nivel_risco*100}/>
-        else  if(rowData.Nivel_risco < 0.4 ) return <ProgressBar variant="success" now={rowData.Nivel_risco*100}/>
-        else if(rowData.Nivel_risco >= 0.4 && rowData.Nivel_risco <= 0.8) return <ProgressBar variant="warning" now={rowData.Nivel_risco*100}/>
+        if (rowData.Nivel_risco > 0.8)
+          return (
+            <ProgressBar
+              variant="danger"
+              now={rowData.Nivel_risco * 100}
+              label={`${rowData.Nivel_risco * 100}%`}
+              style={{ height: "16px" }}
+            />
+          );
+        else if (rowData.Nivel_risco < 0.4)
+          return (
+            <ProgressBar
+              variant="success"
+              now={rowData.Nivel_risco * 100}
+              label={`${rowData.Nivel_risco * 100}%`}
+              style={{ height: "16px" }}
+            />
+          );
+        else if (rowData.Nivel_risco >= 0.4 && rowData.Nivel_risco <= 0.8)
+          return (
+            <ProgressBar
+              variant="warning"
+              now={rowData.Nivel_risco * 100}
+              label={`${rowData.Nivel_risco * 100}%`}
+              style={{ height: "16px" }}
+            />
+          );
       },
       validate: (rowData) => rowData.Nivel_risco > 0.0,
     },
@@ -96,36 +114,32 @@ function Score({loja}) {
   return (
     <>
       <MaterialTable
-      localization={{
-        pagination: {
-            labelDisplayedRows: '{from}-{to} of {count}'
-        },
-        toolbar: {
-            nRowsSelected: '{0} row(s) selected'
-        },
-        header: {
-            actions: 'Ver +'
-        },
-        body: {
-            emptyDataSourceMessage: 'No records to display',
+        localization={{
+          pagination: {
+            labelDisplayedRows: "{from}-{to} of {count}",
+          },
+          toolbar: {
+            nRowsSelected: "{0} row(s) selected",
+          },
+          header: {
+            actions: "Ver +",
+          },
+          body: {
+            emptyDataSourceMessage: "No records to display",
             filterRow: {
-                filterTooltip: 'Filter'
-            }
-        }
-    }}
-        style={{ padding: "0 8px", borderRadius: "0.5rem", boxShadow: "none" }}
+              filterTooltip: "Filter",
+            },
+          },
+        }}
+        style={{ padding: "0 5px", borderRadius: "0.5rem", boxShadow: "none" }}
         minRows={10}
         icons={tableIcons}
-        title={
-          <div className="title_table">
-            <h2>Risco geral</h2>
-          </div>
-        }
+        title={<h2>Risco geral</h2>}
         data={loja}
         columns={columns}
         options={{
-            maxBodyHeight: "41vh",
-           // showSelectAllCheckbox: true,
+          maxBodyHeight: "45vh",
+          // showSelectAllCheckbox: true,
           pageSize: 50,
           pageSizeOptions: [0],
           rowStyle: {
@@ -145,7 +159,7 @@ function Score({loja}) {
             color: "white",
           },
           sorting: true,
-        
+
           paging: true,
           search: true,
           //exportButton: true,
@@ -153,15 +167,19 @@ function Score({loja}) {
           //addRowPosition: true,
         }}
         actions={[
-            rowData => ({
-              icon: () => <Link to={`/Loja/loja/${rowData._id}`}><AddCircle style={{color: 'dodgerblue'}}/></Link> ,
-              tooltip: <b>Ligação para a loja</b>,
-              onClick: (event, rowData) => {
-                console.log(" link para a loja: ", rowData._id);              
-              //window.open(`/Loja/loja/${rowData._id}`).focus() 
-              }
-            })
-          ]}
+          (rowData) => ({
+            icon: () => (
+              <Link to={`/Loja/loja/${rowData._id}`}>
+                <AddCircle style={{ color: "dodgerblue" }} />
+              </Link>
+            ),
+            tooltip: <b>Ligação para a loja</b>,
+            onClick: (event, rowData) => {
+              console.log(" link para a loja: ", rowData._id);
+              //window.open(`/Loja/loja/${rowData._id}`).focus()
+            },
+          }),
+        ]}
       />
     </>
   );

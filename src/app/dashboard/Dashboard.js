@@ -60,24 +60,24 @@ export class Dashboard extends Component {
     return (
       <>
         <div>
-          <div className="row " style={{ marginRight: "0rem" }}>
+          <div className="row m-1" style={{ marginRight: "0rem"}}>
             <div
-              className="col-xl-5 col-lg-12 col-sm-12 grid-margin stretch-card"
+              className="col-xl-5 col-lg-12 col-sm-12 grid-margin"
               style={{ marginRight: "0rem" }}
             >
-              <div className="card rounded">
+             
                 {console.log("Estado da loja:", this.state.loja)}
                 <Mapa
                   loja={this.state.loja}
                   mapaToDashboard = {this.handleRisco}
                   
                 />
-              </div>
+              
             </div>
 
-            <div className="col-xl-7" style={{ border: "0px solid blue" }}>
-              <div className="row">
-                <div className="card col-xl-4" style={{ padding: 0 }}>
+            <div className="col-xl-7 m-0 grid-margin " style={{ border: "0px solid blue"}}>
+              <div className="row flex-grow-2">
+                <div className="card col-xl-4 col-md-4 col-sm-4" style={{ padding: 0 }}>
                   <div className="card">
                     <div className="card-body text-center">
                       <h6 className="mb-2 text-dark font-weight-normal">
@@ -115,7 +115,7 @@ export class Dashboard extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="card col-xl-4" style={{ padding: 0 }}>
+                <div className="card col-xl-4 col-md-4 col-sm-4" style={{ padding: 0 }}>
                   <div className="card-body text-center">
                     <h6 className="mb-2 text-dark font-weight-normal">
                       Risco Médio
@@ -151,7 +151,7 @@ export class Dashboard extends Component {
                     </h3>
                   </div>
                 </div>
-                <div className="card col-xl-4" style={{ padding: 0 }}>
+                <div className="card col-xl-4 col-md-4 col-sm-4" style={{ padding: 0 }}>
                   <div className="card-body text-center">
                     <h6 className="mb-2 text-dark font-weight-normal">
                       Risco Baixo
@@ -189,9 +189,9 @@ export class Dashboard extends Component {
                 </div>
               </div>
 
-              <div className="row" style={{ marginTop: "0.5rem" }}>
-                <div className="col-xl-12" style={{ padding: 0 }}>
-                  <div className="card col-xl-12" style={{ padding: 0 }}>
+              <div className="row flex-grow-1" style={{ marginTop: "0.5rem"}}>
+                <div className="col-xl-12 col-md-12 col-sm-12" style={{ padding: 0 }}>
+                  <div className="card col-xl-12" style={{ padding: 0, height:"100%"}}>
                     <Score loja={this.state.loja} />
                   </div>
                 </div>
