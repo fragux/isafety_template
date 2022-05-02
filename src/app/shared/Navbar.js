@@ -109,6 +109,7 @@ class Navbar extends Component {
                   <Dropdown.Item className="dropdown-item preview-item" onClick={evt =>evt.preventDefault()}>
                     <div className="preview-thumbnail">
                       <img src={require("../../assets/images/faces/face4.jpg")} alt="user" className="profile-pic"/>
+                      
                     </div>
                     <div className="preview-item-content d-flex align-items-start flex-column justify-content-center">
                       <h6 className="preview-subject ellipsis mb-1 font-weight-normal"> Mark send you a message </h6>
@@ -154,13 +155,14 @@ class Navbar extends Component {
               <Dropdown alignRight>
               <Dropdown.Toggle className="nav-link count-indicator">
                   <div className="nav-profile-img">
-                      <img src={require("../../assets/images/faces/face28.png")} alt="profile" />
+                      <img src={require("../../assets/logo/_user_abel_pires.jpg")} alt="profile"  style={{width: "35px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}}/>
                     </div>
                    
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="preview-list navbar-dropdown">
                   <div className="p-3 text-center bg-primary">
-                    <img className="img-avatar img-avatar48 img-avatar-thumb" src={require("../../assets/images/faces/face28.png")} alt=""/>
+                 
+                    <img className="img-avatar img-avatar48 img-avatar-thumb" src={require("../../assets/logo/_user_abel_pires.jpg")} alt="" style={{width: "45px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}} />
                   </div>
                   <div className="p-2">
                     <h5 className="dropdown-header text-uppercase pl-2 text-dark"> User Options </h5>

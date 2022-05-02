@@ -1,0 +1,27 @@
+#teste{
+
+    border-color: rgb(1, 29, 29);
+    border-width: medium;
+    border-style: solid;
+    border-color: #1133dd;
+  
+    border: 5;
+    border-width:5;
+
+}
+.panel-heading {
+    display: inline-block;
+  }
+  
+  .panel-group .panel+.panel {
+    margin: 0;
+    border: 0;
+  }
+  
+  .panel {
+    border: 0 !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+  }
+  

@@ -163,14 +163,16 @@ class Sidebar extends Component {
               </ul>
             </Collapse>
     </li>*/}
+    { /*
           <li className="nav-item documentation-link">
-            <a className="nav-link" href="http://www.google.com">
+           <a className="nav-link" href="http://www.google.com">
               <span className="icon-bg">
                 <i className="mdi mdi-file-document-box menu-icon"></i>
               </span>
               <span className="menu-title"> Entrepostos </span>
-            </a>
-          </li>
+  </a>
+          </li>*/}
+          { /*
           <li className="nav-item sidebar-user-actions">
             <div className="user-details">
               <div className="d-flex justify-content-between align-items-center">
@@ -188,6 +190,7 @@ class Sidebar extends Component {
               </div>
             </div>
           </li>
+          */}
           <li className="nav-item sidebar-user-actions">
             <div className="sidebar-user-menu">
               <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-settings menu-icon"></i>

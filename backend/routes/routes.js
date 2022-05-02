@@ -5,6 +5,7 @@ const signUpTemplateCopy = require("../models/SignUpModels");
 const lojaDataCopy = require("../models/Loja");
 const bcrypt = require("bcrypt");
 const saidaalgoritmo = require("../models/saidaalgoritmo");
+const areas = require("../models/Area");
 const ewadados=require("../models/EWA")
 
 router.use(express.json({ extended: true }));
@@ -28,6 +29,27 @@ router.post("/signup", async (request, response) => {
       response.json(error);
     });
 });
+//rota para as seccoes
+
+router.get("/areas/:areas", async (req, res) => {
+  const seccao = req.params.Seccao;
+
+  try {
+    const getloja = await areas.findOne({ Seccao: Seccao });
+
+    if (!getloja) {
+      res.status(422).json({ message: "Loja não encontrada!" });
+      return;
+    }
+
+    res.status(200).json(getloja);
+  } catch (error) {
+    res.status(500).json({ erro: error });
+  }
+});
+
+
+
 //rotas para as lojas
 router.post("/sumeteloja", async (request, response) => {
   console.log("Nome da loja: ", request.body.name);
@@ -298,10 +320,18 @@ router.post("/submetealgoritmo", async (req, res) => {
     
 });
 
-router.get("/algoritmo", async (req, res) => {
- 
-    const data = await saidaalgoritmo.find({});
-    return response.json(data);
+router.get("/algoritmo/:idloja", async (req, res) => {
+  try {
+    const data = await saidaalgoritmo.findOne({ LojaId: req.params.idloja});
+    if(!data) {
+
+      res.status(422).json({ message: "Insignia não encontrada!" });
+      return;
+    }
+      res.status(200).json(data);
+    } catch (err) {
+      res.status(500).json({ message: err });
+    }
   });
 
 
@@ -317,6 +347,33 @@ router.get("/algoritmo/saida/:idloja", function (req, res, next) {
     })
     .catch(next);
 });
+
+router.get("/algoritmo/saida/:idloja/saidaalgoritmo", function (req, res, next) {
+  console.log("Port 3000 - Query: ", req.body.saidaalgoritmo.id);
+  saidaalgoritmo
+    .find({LojaId: req.params.idloja, saidaalgoritmo: req.body.saidaalgoritmo})
+    .then(function (lojas) {
+     
+      res.send(lojas);
+    })
+  .catch(next);
+});
+/*router.get("/dashboard/:Cadeia", async (req, res) => {
+  const Cadeia = req.query.Cadeia;
+
+  try {
+    const getInsignia = await lojaDataCopy.find({ Cadeia }, "");
+
+    if (!getInsignia) {
+      res.status(422).json({ message: "Insignia não encontrada!" });
+      return;
+    }
+
+    res.status(200).json(getInsignia);
+  } catch (error) {
+    res.status(500).json({ erro: error });
+  }
+});*/
 
 
 router.delete("/algoritmo/:id", async (req, res) => {
@@ -335,6 +392,7 @@ router.delete("/algoritmo/:id", async (req, res) => {
     res.status(500).json({ erro: error });
   }
 });
+/*
 router.get("/algoritmo/:id", async (req, res) => {
   const id = req.params.id;
 
@@ -350,7 +408,7 @@ router.get("/algoritmo/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ erro: error });
   }
-});
+});*/
 //este patch atualiza apenas uma loja
 router.patch("/algoritmo/:id", async (req, res) => {
   const id = req.params.id;

@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import {CircularProgressbarWithChildren} from 'react-circular-progressbar';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 
 
 export class Loja extends Component {
@@ -13,6 +13,7 @@ export class Loja extends Component {
     super(props);
     this.state={
       lojas: [],
+      loja2:[],
      
   }
 }
@@ -28,6 +29,7 @@ export class Loja extends Component {
               const loja = res.data;
               this.setState({loja});
               this.setState({
+                Id:loja._id,
                 DT: loja.DT,
                 DTCC: loja.DTCC,
                 DTCCFR: loja.DTCCFR,
@@ -49,54 +51,69 @@ export class Loja extends Component {
                 Disponivel: loja.Disponivel,
                 Nivel_risco: loja.Nivel_risco,
                 dataAlgoritmo:loja.dataAlgoritmo,
-                Seccao:loja.dataAlgoritmo.Seccao,
-                })
+                
+                });console.log(loja)
                
             })
             
             axios.get(`http://127.0.0.1:3000/app/algoritmo/saida`+ rotan )
             .then(res => {
-                const loja = res.data;
-                this.setState({loja});
-                this.setState({
-                  Nivel_risco2: loja.Nivel_risco2,
-                  
-                  SaidaAlgoritmo:loja.SaidaAlgoritmo,
-                  
-                  })
-              })/*
-          try{
-    let response = await fetch('http://127.0.0.1:3000/app' + rota , {
-            method: 'GET',
-            headers: {
-               
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            
-            
-        })
-   
-       
-        let json = await response.json();
-        this.setState({ 
-            loja: json
-        });
-        console.log(json);
-    } catch(e){
-        console.log("Error to Get Client: " + e);
-        const location = this.props.location;
-        console.log("Rota pelo menu: ", rota);
-    }
-  */
-          
-        
+                const loja2 = res.data;
+                console.log("ola",res.data[0].SaidaAlgoritmo);
+                this.setState({loja2});
 
+                 this.setState({
+                //   Nivel_risco2: loja2.Nivel_risco2,
+                //   CodigoLoja:loja2.CodigoLoja,
+
+                //   SaidaAlgoritmo:loja2.SaidaAlgoritmo, 
+                   Seccao:res.data[0].SaidaAlgoritmo.Seccao,
+                   });
+                  
+                 
+                 // console.log("adeus",res.data[0].SaidaAlgoritmo.length)
+
+                  var teste=res.data[0].SaidaAlgoritmo
+                  var teste3=res.data[0].SaidaAlgoritmo.length
+                  console.log("ola de novo",teste);
+                  console.log("get2",teste[0].Seccao)
+                  var teste2 = 0;
+                 
+                  
+                    
+                        for(var i=0;i<teste3;i++){
+                          if(teste[i].Seccao==1 && teste[i].Acidente==1){
+                           
+                            teste2++;
+                           
+                          }  
+                         
+                          console.log("fds1213333" ,(teste2));
+                          
+                       } 
+                      
+                        var media= ((teste2/teste3)*100);
+                      //  console.log("fds121" ,(teste2.length));
+                      console.log("fds121333344444444" ,(teste2));
+                      console.log("media" ,(media));
+                       return media;
+                     
+                      })
+                
+                 
+             
+             
+          
+       
 }
 
 
+
   render() {
-    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, loja, Seccao} = this.state;
+    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, CodigoLoja,Nivel_risco,Seccao , lojas} = this.state;
+    const location = this.props.location;
+    const rota= location.pathname;
+    const rotan=rota.substring(10,rota.length);
     return (
       
        
@@ -105,66 +122,128 @@ export class Loja extends Component {
           <div className="col-md-8 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Áreas</h4>
-                <div className="row">
+              <h4 className="card-title" style={{ fontSize: 30,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675",  textAlign:'center'}}>Áreas</h4>
+                <div className="row"  style={{  marginTop: 40}}>
                     <div className="col-md-4 grid-margin ">
-                    <div className="card" style={{backgroundColor:"#3774a9", textAlign:'center'  }}>
-                    
+                    <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                    <Link
+                        to={`/Frescos`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
                     <div className="box1" style={{ textAlign:'center'}}>
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                    {//<a href="Loja/Seccao" class="textoCartoes"  style={{ fontSize: 20,  fontstyle: "normal", color:"#F2F3F8", marginTop:60}}>Frescos</a>
+                    }
                     
-                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10}} className="textoCartoes" >Frescos</h3>
+                      
+                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Frescos</h3>
                  
-                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#335675",backgroundColor:"#CB3130"}} className="textoCartoes">
-             {Seccao}
+                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
+             {Nivel_risco }
            </h1>
-                       
+          
                         </div>
+                        </Link>
                         </div>
 </div>
                         <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#3774a9", textAlign:'center'  }}>
+                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                        <Link
+                         to={`/NAlimentar`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
                         <div className="box1">
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
                     
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10}} className="textoCartoes" >Frescos</h3>
+                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Não Alimentar</h3>
                  
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#335675",backgroundColor:"#CB3130" , Align:'End'}} className="textoCartoes">
+                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center',color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
              45%
            </h1>
                         </div>
+                        </Link>
                         </div>
                       
                         </div>
                         <div className="col-md-4 grid-margin " >
-                        <div className="card" style={{backgroundColor:"#3774a9", textAlign:'center'  }}>
+                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center', borderRadius: 8   }}>
+                        <Link
+                        to={`/Suporte`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
                         <div className="box1">
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
                     
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10}} className="textoCartoes" >Frescos</h3>
+                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Suporte</h3>
                  
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#335675",backgroundColor:"#CB3130"}} className="textoCartoes">
+                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
              45%
            </h1>
                         </div>
+                        </Link>
                         </div>
                       
                         </div>
                         <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#3774a9", textAlign:'center'  }}>
+                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                        <Link
+                         to={`/Caixas`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
                         <div className="box1">
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
                     
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10}} className="textoCartoes" >Frescos</h3>
+                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Caixas</h3>
                  
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#335675",backgroundColor:"#CB3130" , Align:'End'}} className="textoCartoes">
+                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
              45%
            </h1>
                         </div>
+                        </Link>
+                        </div>
+                      
+                        </div>
+                        <div className="col-md-4 grid-margin">
+                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                        <Link
+                         to={`/Textil`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
+                        <div className="box1">
+                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                    
+                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Têxtil</h3>
+                 
+                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
+             45%
+           </h1>
+           </div>
+           </Link>
+                        </div>
+                      
+                        </div>
+                        <div className="col-md-4 grid-margin">
+                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                        <Link
+                         to={`/Alimentar`+ rotan}
+                        style={{ color: "white", textDecoration: "none" }}
+                      >
+                        <div className="box1">
+                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                    
+                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Alimentar</h3>
+                 
+                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
+                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
+             45%
+           </h1>
+           </div>
+            </Link>
                         </div>
                       
                         </div>
@@ -178,16 +257,17 @@ export class Loja extends Component {
               <h2  style={{ fontSize: 20,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675"}}> <img className="variaveis"  style={{width: 18}}  ></img> {Nome}</h2>
                 <div className="row">
                   <div className="col-12">
-                   
-                    <p style={{fontStyle:"bold"}}>Cadeia: <strong>{Cadeia}</strong></p>
-                    <p style={{fontStyle:"bold"}}>Insignia: <strong>{Insignia} </strong> </p>
-                    <p style={{fontStyle:"bold"}}>Dop: <strong>{DOP} </strong> </p>
-                    <p style={{fontStyle:"bold"}}>Distrito:<strong>{Distrito}</strong>  </p>
-                    <p style={{fontStyle:"bold"}}>Freguesia:<strong>{Freguesia}</strong> </p>
-                    <p style={{fontStyle:"bold"}}>Morada:<strong>{Morada}</strong>  </p>
-                    <p style={{fontStyle:"bold"}}>Código Postal:<strong>{CodigoPost}</strong>  </p>
-                    <p style={{fontStyle:"bold"}}>Localidade:<strong>{Localidade}</strong>  </p>
-            
+                  <br/><br/>
+                    <p style={{color:"#335675"}}>Cadeia: <strong>{Cadeia}</strong></p>
+                    <p style={{color:"#335675"}}>Insignia: <strong>{Insignia} </strong> </p>
+                    <p style={{color:"#335675"}}>Dop: <strong>{DOP} </strong> </p>
+                    <p style={{color:"#335675"}}>Distrito: <strong>{Distrito}</strong>  </p>
+                    <br/><br/>
+                    <p style={{color:"#335675"}}>Freguesia: <strong>{Freguesia}</strong> </p>
+                    <p style={{color:"#335675"}}>Morada: <strong>{Morada}</strong>  </p>
+                    <p style={{color:"#335675"}}>Código Postal: <strong>{CodigoPost}</strong>  </p>
+                    <p style={{color:"#335675"}}>Localidade: <strong>{Localidade}</strong>  </p>
+                    
                   </div>
                 </div>
                
@@ -245,10 +325,10 @@ fontstyle: 'normal', textSizeAdjust:20}}>45%</i>
                                       
                                     </svg>
                                     <CircularProgressbarWithChildren className="progress-followers"
-                                    value={25}>
+                                    value={Nivel_risco*100}>
                                       <div>
                                         <i className="tt" style={{color:"#335675", fontfamily: 'Rubik',
-fontstyle: 'normal', textSizeAdjust:20}}>25%</i>
+fontstyle: 'normal', textSizeAdjust:20}}>{Nivel_risco*100}%</i>
                                       </div>
                                     </CircularProgressbarWithChildren>
                                   </div> 

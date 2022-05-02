@@ -15,7 +15,7 @@ const BasicTable = lazy(() => import('./tables/BasicTable'));
 
 const Loja = lazy(() => import('./Loja/loja'));
 
-const ChartJs = lazy(() => import('./charts/ChartJs'));
+const Seccao = lazy(() => import('./Loja/Seccao'));
 
 const Error404 = lazy(() => import('./error-pages/Error404'));
 const Error500 = lazy(() => import('./error-pages/Error500'));
@@ -49,8 +49,12 @@ class AppRoutes extends Component {
 
           <Route path="/Loja/loja" component={ Loja } />
 
-          <Route path="/charts/chart-js" component={ ChartJs } />
-
+          <Route path="/Suporte" component={ Seccao } />
+          <Route path="/Caixas" component={ Seccao } />
+          <Route path="/Textil" component={ Seccao } />
+          <Route path="/Alimentar" component={ Seccao } />
+          <Route path="/NAlimentar" component={ Seccao } />
+          <Route path="/Frescos" component={ Seccao } />
 
           <Route path="/user-pages/login-1" component={ Login } />
           <Route path="/user-pages/register-1" component={ Register1 } />
