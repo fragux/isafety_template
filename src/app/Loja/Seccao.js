@@ -370,6 +370,8 @@ calculoSeccao(){
     const rota= location.pathname;
     const rotan=rota.substring(rota.length-25,rota.length,rota.length); 
     console.log("Objeto ", rota);  
+
+
     const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade,CodigoLoja,Nivel_risco, listaareas, listasum} = this.state;
     const sum=[];
     const name=[];
@@ -404,7 +406,11 @@ calculoSeccao(){
                     return(
             Sections.map(({Nome,Data}, index) => {
                     console.log("teste1233333333333333",Nome)
-                    
+                    const total = Sections.reduce(
+      (total, currentItem) => isNaN(currentItem.Data.Average) ? (total = total + 0) :  (total = total + currentItem.Data.Average),
+
+      0
+    );
                 return(
                     <div  className="col-md-4 grid-margin ">
                    <div
@@ -433,7 +439,7 @@ calculoSeccao(){
                  
                     <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas </p>
                     <h1     style={
-                  Data.Average <= 0.3
+                  Data.Average <= 0.3 && Data.Average >=0
                     ? {
                         fontSize: 25,
                         height: 40,
@@ -442,7 +448,7 @@ calculoSeccao(){
                         color: "#F2F3F8",
                         backgroundColor: "green",
                       }
-                    : Data.Average < 0.6
+                    : Data.Average > 0.3 && Data.Average <0.8
                     ? {
                         fontSize: 25,
                         height: 40,
@@ -460,7 +466,7 @@ calculoSeccao(){
                         backgroundColor: "grey",
                       }
                 } className="textoCartoes">
-                    {Data.Average.toFixed(2) * 100}%
+                    {isNaN(Data.Average) ? 0 : Data.Average.toFixed(2) * 100}%
                     
            </h1>
 
@@ -539,7 +545,8 @@ calculoSeccao(){
                                 backgroundColor: "grey",
                               }
                         } className="textoCartoes">
-                            {Data.Average.toFixed(2) * 100}%
+                                          {isNaN(Data.Average) ? 0 : Data.Average.toFixed(2) * 100}%
+
                             
                    </h1>
         
@@ -615,7 +622,7 @@ calculoSeccao(){
                                         backgroundColor: "grey",
                                       }
                                 } className="textoCartoes">
-                                    {Data.Average.toFixed(2) * 100}%
+                                    {isNaN(Data.Average) ? 0 : Data.Average.toFixed(2) * 100}%
                                     
                            </h1>
                 
@@ -690,7 +697,8 @@ calculoSeccao(){
                         backgroundColor: "grey",
                       }
                 } className="textoCartoes">
-                    {Data.Average.toFixed(2) * 100}%
+                                 {isNaN(Data.Average) ? 0 : Data.Average.toFixed(2) * 100}%
+
                     
            </h1>
 
