@@ -6,13 +6,15 @@ import Button from "react-bootstrap/Button";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "./loja.css";
 
 function RenderSeccao({ seccao, rotan, probSeccao }) {
   return ( 
-    seccao.map(({Area}) => {
-      console.log("maping: ", Area);
+    seccao.map(({Area, Sections}) => {
+      console.log("Daos das Secções: ", Sections.map( ({Data}) =>  Data));
+      const total=(Sections.reduce((total,currentItem) =>  total = total + currentItem.Data.Average , 0 ));
       return(
-      <div className="col-md-4 grid-margin ">
+      <div className="col-md-4 grid-margin mt-2">
       <div
         className="card"
         style={{
@@ -22,7 +24,7 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
         }}
       >
         <Link
-          to={`/Frescos` + rotan}
+          to={`/${Area}` + rotan}
           style={{ color: "white", textDecoration: "none" }}
         >
           <div className="box1" style={{ textAlign: "center" }}>
@@ -51,34 +53,45 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
             <p
               className="textoCartoes"
               style={{
-                fontSize: 12,
+                fontSize: 14,
                 textAlign: "center",
                 color: "#F2F3F8",
               }}
             >
               Nivel de risco nas últimas horas
             </p>
-            <h1
-              style={{
-                fontSize: 25,
-                color: "#F2F3F8",
-                backgroundColor: "#CB3130",
+       
+
+            <h1 
+              style={(total <= 0.3) ? ({
+                fontSize: 25,               
                 height: 40,
                 marginBottom: 0,
                 borderRadius: 8,
-              }}
-              className="textoCartoes"
-            >
-              {(
-                probSeccao[6].Average +
-                probSeccao[7].Average +
-                probSeccao[13].Average +
-                probSeccao[11].Average +
-                probSeccao[4].Average +
-                probSeccao[4].Average
-              ).toFixed(2) * 100}
+                color: "#F2F3F8",
+                backgroundColor: "green"
+              }): (total < 0.6) ?({
+            fontSize: 25,               
+                height: 40,
+                marginBottom: 0,
+                borderRadius: 8,
+                color: "#F2F3F8",
+                backgroundColor: "#ffc107"
+            
+            }): ({
+              fontSize: 25,               
+                  height: 40,
+                  marginBottom: 0,
+                  borderRadius: 8,
+                  color: "#F2F3F8",
+                  backgroundColor: "grey"
+              
+              })}
+              >
+              {(isNaN(total)?  0 : total.toFixed(2) * 100 )}
               %
             </h1>
+           
           </div>
         </Link>
       </div>
