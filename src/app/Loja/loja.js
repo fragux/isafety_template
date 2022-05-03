@@ -9,96 +9,110 @@ import { Link } from "react-router-dom";
 import "./loja.css";
 
 function RenderSeccao({ seccao, rotan, probSeccao }) {
-  return ( 
-    seccao.map(({Area, Sections}) => {
-      console.log("Daos das Secções: ", Sections.map( ({Data}) =>  Data));
-      const total=(Sections.reduce((total,currentItem) =>  total = total + currentItem.Data.Average , 0 ));
-      return(
+  return seccao.map(({ Area, Sections}, index) => {
+    console.log(
+      "Dados das Secções: ",
+      Sections.map(({ Data }) => Data)
+    );
+    console.log("indice do array", index)
+    const total = Sections.reduce(
+      (total, currentItem) => (total = total + currentItem.Data.Average),
+      0
+    );
+    return (
       <div className="col-md-4 grid-margin mt-2">
-      <div
-        className="card"
-        style={{
-          backgroundColor: "#335675",
-          textAlign: "center",
-          borderRadius: 8,
-        }}
-      >
-        <Link
-          to={`/${Area}` + rotan}
-          style={{ color: "white", textDecoration: "none" }}
-        >
-          <div className="box1" style={{ textAlign: "center" }}>
-            <img
-              className="imgCartoes"
-              src={Frescos}
-              alt=""
-              style={{ height: 70, marginTop: -30 }}
-            />
+        <div
+          className="card"
+          style={
+            (index % 2 === 0) ?
             {
-              //<a href="Loja/Seccao" class="textoCartoes"  style={{ fontSize: 20,  fontstyle: "normal", color:"#F2F3F8", marginTop:60}}>Frescos</a>
-            }
+            backgroundColor: "#335675",
+            textAlign: "center",
+            borderRadius: 8,
+          }: 
+          {
+            backgroundColor: "lightgrey",
+            textAlign: "center",
+            borderRadius: 8,
+          }
+        }
+        >
+          <Link
+            to={`/${Area}` + rotan}
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            <div className="box1" style={{ textAlign: "center" }}>
+              <img
+                className="imgCartoes"
+                src={Frescos}
+                alt=""
+                style={{ height: 70, marginTop: -30 }}
+              />
+              {
+                //<a href="Loja/Seccao" class="textoCartoes"  style={{ fontSize: 20,  fontstyle: "normal", color:"#F2F3F8", marginTop:60}}>Frescos</a>
+              }
 
-            <h3
-              style={{
-                fontSize: 20,
-                textAlign: "center",
-                marginTop: 10,
-                color: "#F2F3F8",
-              }}
-              className="textoCartoes"
-            >
-              {Area}
-            </h3>
-
-            <p
-              className="textoCartoes"
-              style={{
-                fontSize: 14,
-                textAlign: "center",
-                color: "#F2F3F8",
-              }}
-            >
-              Nivel de risco nas últimas horas
-            </p>
-       
-
-            <h1 
-              style={(total <= 0.3) ? ({
-                fontSize: 25,               
-                height: 40,
-                marginBottom: 0,
-                borderRadius: 8,
-                color: "#F2F3F8",
-                backgroundColor: "green"
-              }): (total < 0.6) ?({
-            fontSize: 25,               
-                height: 40,
-                marginBottom: 0,
-                borderRadius: 8,
-                color: "#F2F3F8",
-                backgroundColor: "#ffc107"
-            
-            }): ({
-              fontSize: 25,               
-                  height: 40,
-                  marginBottom: 0,
-                  borderRadius: 8,
+              <h3
+                style={{
+                  fontSize: 20,
+                  textAlign: "center",
+                  marginTop: 10,
                   color: "#F2F3F8",
-                  backgroundColor: "grey"
-              
-              })}
+                }}
+                className="textoCartoes"
               >
-              {(isNaN(total)?  0 : total.toFixed(2) * 100 )}
-              %
-            </h1>
-           
-          </div>
-        </Link>
+                {Area}
+              </h3>
+
+              <p
+                className="textoCartoes"
+                style={{
+                  fontSize: 14,
+                  textAlign: "center",
+                  color: "#F2F3F8",
+                }}
+              >
+                Nivel de risco nas últimas horas
+              </p>
+
+              <h1
+                style={
+                  total <= 0.3
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "green",
+                      }
+                    : total < 0.6
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "#ffc107",
+                      }
+                    : {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "grey",
+                      }
+                }
+              >
+                {isNaN(total) ? 0 : total.toFixed(2) * 100}%
+              </h1>
+            </div>
+          </Link>
+        </div>
       </div>
-    </div>)
-    })
-    
-  );
+    );
+  });
 }
 
 export class Loja extends Component {
@@ -342,72 +356,76 @@ export class Loja extends Component {
   }
 
   arrayArea(array) {
-  const area = [{
-      Area: "Frescos",
-      Sections: [
-        {
-          Nome: "Padaria",
-          Data: array[6],
-        },
-        {
-          Nome: "Talho",
-          Data: array[7],
-        },
-        {
-          Nome: "Peixaria",
-          Data: array[13],
-        },
-        {
-          Nome: "Charcutaria",
-          Data: array[11],
-        },
-        {
-          Nome: "Frutas",
-          Data: array[4],
-        },
-        {
-          Nome: "Takeaway",
-          Data: array[5],
-        },
-      ]},
+    const area = [
       {
-      Area: "Suporte",
-      Sections: [
-        {
-          Nome: "Decoração",
-          Data: array[9],
-        },
-        {
-          Nome: "Manutenção",
-          Data: "",
-        },
-        {
-          Nome: "Gestor Loja",
-          Data: array[1],
-        }
-      ]},
+        Area: "Frescos",
+        Sections: [
+          {
+            Nome: "Padaria",
+            Data: array[6],
+          },
+          {
+            Nome: "Talho",
+            Data: array[7],
+          },
+          {
+            Nome: "Peixaria",
+            Data: array[13],
+          },
+          {
+            Nome: "Charcutaria",
+            Data: array[11],
+          },
+          {
+            Nome: "Frutas",
+            Data: array[4],
+          },
+          {
+            Nome: "Takeaway",
+            Data: array[5],
+          },
+        ],
+      },
       {
-      Area: "Caixas",
-      Sections: [
-        {
-          Nome: "Caixas",
-          Data: array[12],
-        },
-        {
-          Nome: "Têxtil",
-          Data: array[14],
-        }
-      ]},{
-      
-      Area: "Alimentar",
-      Sections: [
-        {
-          Nome: "Alimentar",
-          Data: array[0],
-        },
-       
-      ]
-    }];
+        Area: "Suporte",
+        Sections: [
+          {
+            Nome: "Decoração",
+            Data: array[9],
+          },
+          {
+            Nome: "Manutenção",
+            Data: "",
+          },
+          {
+            Nome: "Gestor Loja",
+            Data: array[1],
+          },
+        ],
+      },
+      {
+        Area: "Caixas",
+        Sections: [
+          {
+            Nome: "Caixas",
+            Data: array[12],
+          },
+          {
+            Nome: "Têxtil",
+            Data: array[14],
+          },
+        ],
+      },
+      {
+        Area: "Alimentar",
+        Sections: [
+          {
+            Nome: "Alimentar",
+            Data: array[0],
+          },
+        ],
+      },
+    ];
     return area;
   }
 
