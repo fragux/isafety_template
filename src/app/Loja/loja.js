@@ -7,16 +7,20 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./loja.css";
+import { GiConsoleController } from "react-icons/gi";
 
 function RenderSeccao({ seccao, rotan, probSeccao }) {
-  return seccao.map(({ Area, Sections}, index) => {
+  return seccao.map(({ Area, Sections }, index) => {
     console.log(
       "Dados das Secções: ",
       Sections.map(({ Data }) => Data)
     );
-    console.log("indice do array", index)
+    console.log("indice do array", index);
     const total = Sections.reduce(
-      (total, currentItem) => (total = total + currentItem.Data.Average),
+      (total, currentItem) =>
+        isNaN(currentItem.Data.Average)
+          ? (total = total + 0)
+          : (total = total + currentItem.Data.Average),
       0
     );
     return (
@@ -24,18 +28,18 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
         <div
           className="card"
           style={
-            (index % 2 === 0) ?
-            {
-            backgroundColor: "#335675",
-            textAlign: "center",
-            borderRadius: 8,
-          }: 
-          {
-            backgroundColor: "lightgrey",
-            textAlign: "center",
-            borderRadius: 8,
+            index % 2 === 0
+              ? {
+                  backgroundColor: "#335675",
+                  textAlign: "center",
+                  borderRadius: 8,
+                }
+              : {
+                  backgroundColor: "lightgrey",
+                  textAlign: "center",
+                  borderRadius: 8,
+                }
           }
-        }
         >
           <Link
             to={`/${Area}` + rotan}
@@ -77,7 +81,7 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
 
               <h1
                 style={
-                  total <= 0.3
+                  total <= 0.3 && total >= 0
                     ? {
                         fontSize: 25,
                         height: 40,
@@ -86,7 +90,7 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
                         color: "#F2F3F8",
                         backgroundColor: "green",
                       }
-                    : total < 0.6
+                    : total > 0.3 && total <= 0.8
                     ? {
                         fontSize: 25,
                         height: 40,
@@ -101,7 +105,7 @@ function RenderSeccao({ seccao, rotan, probSeccao }) {
                         marginBottom: 0,
                         borderRadius: 8,
                         color: "#F2F3F8",
-                        backgroundColor: "grey",
+                        backgroundColor: "green",
                       }
                 }
               >
@@ -429,9 +433,117 @@ export class Loja extends Component {
     return area;
   }
 
+  weekday(day) {
+    switch (day) {
+      case 1:
+        return "Segunda";
+      case 2:
+        return "Terça";
+      case 3:
+        return "Quarta";
+      case 4:
+        return "Quinta";
+      case 5:
+        return "Sexta";
+      case 6:
+        return "Sábado";
+      case 7:
+        return "Domingo";
+      default:
+        break;
+    }
+  }
+
+  gradiente(value) {
+    if (value <= 0.3)
+        return (
+          <div className="px-6 d-flex align-items-center">
+            <svg width="0" height="0">
+              <defs>
+                <linearGradient
+                  id="progress-visitors"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stopColor="#b4ec51" />
+                  <stop offset="100%" stopColor="#429321" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <CircularProgressbarWithChildren
+              className="progress-visitors"
+              value={value * 100}
+            >
+              <div>
+                <b>{(value * 100).toFixed(1)}%</b>
+              </div>
+            </CircularProgressbarWithChildren>
+          </div>
+        );
+  if(value > 0.6)
+        return (
+          <div className="px-6 d-flex align-items-center">
+            <svg width="0" height="0">
+              <defs>
+                <linearGradient
+                  id="progress-followers"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stopColor="#f5515f" />
+                  <stop offset="100%" stopColor="#9f041b" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <CircularProgressbarWithChildren
+              className="progress-followers"
+              value={value * 100}
+            >
+              <div>
+                <b>{(value * 100).toFixed(1)}%</b>
+              </div>
+            </CircularProgressbarWithChildren>
+          </div>
+        );
+
+    if (value > 0.3 && value <= 0.6)
+        return (
+          <div className="px-6 d-flex align-items-center">
+            <svg width="0" height="0">
+              <defs>
+                <linearGradient
+                  id="progress-impressions"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="0%"
+                >
+                  <stop offset="0%" stopColor="#fad961" />
+                  <stop offset="100%" stopColor="#f76b1c" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <CircularProgressbarWithChildren
+              className="progress-impressions"
+              value={value * 100}
+            >
+              <div>
+                <b>{(value * 100).toFixed(1)}%</b>
+              </div>
+            </CircularProgressbarWithChildren>
+          </div>
+        );
+    
+  }
+
   render() {
     const probSeccao = this.calculoSeccao();
     const seccao = this.arrayArea(probSeccao);
+    var today = new Date().getDay();
     console.log(
       "Objeto do algoritmo com probabilidade por secção: ",
       probSeccao
@@ -529,7 +641,7 @@ export class Loja extends Component {
         </div>
         <div className="row" style={{ padding: "0 1rem 0 1rem" }}>
           <div className="col-md-12 d-flex grid-margin stretch-card">
-            <div className="card">
+            <div className="card" style={{ paddingBottom: "2rem" }}>
               <div className="card-body">
                 <h2
                   style={{
@@ -568,36 +680,7 @@ export class Loja extends Component {
                       >
                         Hoje
                       </h3>
-                      <svg width="0" height="0">
-                        <linearGradient
-                          id="progress-followers"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#f5515f" />
-                          <stop offset="100%" stopColor="#9f041b" />
-                        </linearGradient>
-                      </svg>
-                      <CircularProgressbarWithChildren
-                        className="progress-followers"
-                        value={45}
-                      >
-                        <div>
-                          <i
-                            className="tt"
-                            style={{
-                              color: "#335675",
-                              fontfamily: "Rubik",
-                              fontstyle: "normal",
-                              textSizeAdjust: 20,
-                            }}
-                          >
-                            {this.averageLoja(probSeccao).toFixed(2) * 100}%
-                          </i>
-                        </div>
-                      </CircularProgressbarWithChildren>
+                      {this.gradiente(this.averageLoja(probSeccao))}
                     </div>
                   </div>
                 </div>
@@ -623,41 +706,8 @@ export class Loja extends Component {
                       >
                         Amanhã
                       </h3>
-                      <svg width="0" height="0">
-                        <linearGradient
-                          id="progress-followers"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#f5515f" />
-                          <stop offset="100%" stopColor="#9f041b" />
-                        </linearGradient>
-                      </svg>
-                      <CircularProgressbarWithChildren
-                        className="progress-followers"
-                        value={Nivel_risco * 100}
-                      >
-                        <div>
-                          <i
-                            className="tt"
-                            style={{
-                              color: "#335675",
-                              fontfamily: "Rubik",
-                              fontstyle: "normal",
-                              textSizeAdjust: 20,
-                            }}
-                          >
-                            {Nivel_risco * 100}%
-                          </i>
-                        </div>
-                      </CircularProgressbarWithChildren>
+                      {this.gradiente(this.averageLoja(probSeccao) * 1.2)}
                     </div>
-
-                    <a data-toggle="collapse" href="/Loja/lojateste">
-                      Collapsible list group
-                    </a>
                   </div>
                 </div>
 
@@ -681,43 +731,10 @@ export class Loja extends Component {
                         }}
                         className="textoCartoes"
                       >
-                        Amanhã
+                        {this.weekday(today + 2)}
                       </h3>
-                      <svg width="0" height="0">
-                        <linearGradient
-                          id="progress-followers"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#f5515f" />
-                          <stop offset="100%" stopColor="#9f041b" />
-                        </linearGradient>
-                      </svg>
-                      <CircularProgressbarWithChildren
-                        className="progress-followers"
-                        value={25}
-                      >
-                        <div>
-                          <i
-                            className="tt"
-                            style={{
-                              color: "#335675",
-                              fontfamily: "Rubik",
-                              fontstyle: "normal",
-                              textSizeAdjust: 20,
-                            }}
-                          >
-                            25%
-                          </i>
-                        </div>
-                      </CircularProgressbarWithChildren>
+                      {this.gradiente(this.averageLoja(probSeccao) * 2.2)}
                     </div>
-
-                    <a data-toggle="collapse" href="/Loja/lojateste">
-                      Collapsible list group
-                    </a>
                   </div>
                 </div>
 
@@ -741,43 +758,10 @@ export class Loja extends Component {
                         }}
                         className="textoCartoes"
                       >
-                        Amanhã
+                        {this.weekday(today + 3)}
                       </h3>
-                      <svg width="0" height="0">
-                        <linearGradient
-                          id="progress-followers"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="0%"
-                        >
-                          <stop offset="0%" stopColor="#f5515f" />
-                          <stop offset="100%" stopColor="#9f041b" />
-                        </linearGradient>
-                      </svg>
-                      <CircularProgressbarWithChildren
-                        className="progress-followers"
-                        value={25}
-                      >
-                        <div>
-                          <i
-                            className="tt"
-                            style={{
-                              color: "#335675",
-                              fontfamily: "Rubik",
-                              fontstyle: "normal",
-                              textSizeAdjust: 20,
-                            }}
-                          >
-                            25%
-                          </i>
-                        </div>
-                      </CircularProgressbarWithChildren>
+                      {this.gradiente(this.averageLoja(probSeccao) * 3.2)}
                     </div>
-
-                    <a data-toggle="collapse" href="/Loja/lojateste">
-                      Collapsible list group
-                    </a>
                   </div>
                 </div>
               </div>
