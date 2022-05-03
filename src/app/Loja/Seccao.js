@@ -1,6 +1,12 @@
 import React, {Component  } from 'react';
 import { Dropdown, ButtonGroup , Accordion } from 'react-bootstrap';
 import Frescos from "./area_icone.png";
+import Alimentar from "./area2.png";
+import NAlimentar from "./area3.png";
+import Suporte from "./area4.png";
+import Caixas from "./area5.png";
+import Textil from "./area6.png";
+import location2 from "./location.png";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import {CircularProgressbarWithChildren} from 'react-circular-progressbar';
@@ -14,7 +20,7 @@ export class Loja extends Component {
     this.state={
       lojas: [],
       loja2:[],
-     
+     algoritmo:[{}]
   }
 }
   async componentDidMount() {
@@ -23,7 +29,7 @@ export class Loja extends Component {
     const rotan=rota.substring(rota.length-25,rota.length,rota.length);
     const nome=rota.substring(1,33,rota.length)
    const nomefinal=nome.substring(0,nome.length-25,nome.length)
-    console.log("id:", nomefinal)
+    console.log("id:", rota)
     const { lojaId } = this.state;
 
      console.log(rotan)
@@ -64,303 +70,52 @@ export class Loja extends Component {
                 const loja=res.data[0];
                 console.log("ola",res.data[0].SaidaAlgoritmo);
                 this.setState({loja2});
-                var sum=[];
-                var name=[];
-                if(("Frescos/"+rotan)==nomefinal ){
-                    name=["Padaria","Talho","Peixaria","Charcutaria","Frutas e Legumes","t"]
-                    sum=[media7,media8,media14,media12,media5,media6]
-                }
+               
 
 
                
                   var teste=res.data[0].SaidaAlgoritmo
                   var teste3=res.data[0].SaidaAlgoritmo.length
-                  console.log("ola de novo",teste);
+                  this.setState({algoritmo:teste})
+                  console.log("ola de novo",{algoritmo:teste});
                   console.log("get2",res.data[0].SaidaAlgoritmo.length)
-                  var teste2 = 0;
-                  var teste4=0;
-                  var teste5 =0;
-                  var teste6=0;
-                  var teste7=0;
-                  var teste8=0;
-                  var teste9=0;
-                  var teste10=0;
-                  var teste11=0;
-                  var teste12=0;
-                  var teste13=0;
-                  var teste14=0;
-                  var teste15=0;
-                  var teste16=0;
-                  var teste17=0;
-                  var teste18=0;
-                  var teste19=0;
-                  var teste20=0;
-                  var teste21=0;
-                  var teste22=0;
-                        for(var i=0;i<teste3;i++){
-                          if(teste[i].Seccao==1 && teste[i].Acidente==1){
-                           
-                            teste2++;
-                           
-                          }  
-                        
-                         
-                       } 
-                      
-                        var media1= ((teste2/teste3)*100);
-                      
+                 
+                 /*
+                         var sum=[];
+                         var name=[];
+                         if(("/Frescos"+ rotan)== rota ){
+                             name=['Padaria','Talho','Peixaria','Charcutaria','Frutas e Legumes','Take away']
+                             sum=[probSeccao[6].Average, media8, media14, media12, media5, media6]
+                            
+                             
+                         }
 
-                        for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==2 && teste[i].Acidente==1){
-                             
-                              teste4++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media2= ((teste4/teste3)*100);
+                         const listaareas=name.map(
+                            (c,i) =>
+                            <p key={i}>{c}</p>
+                         ) 
 
-                         
-                        for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==3 && teste[i].Acidente==1){
-                             
-                              teste5++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media3= ((teste5/teste3)*100);
-
-                             
-                        for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==4 && teste[i].Acidente==1){
-                             
-                              teste6++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media4= ((teste6/teste3)*100);
-
-                             
-                        for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==5 && teste[i].Acidente==1){
-                             
-                              teste7++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media5= ((teste7/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==6 && teste[i].Acidente==1){
-                             
-                              teste8++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media6= ((teste8/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==7 && teste[i].Acidente==1){
-                             
-                              teste9++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media7= ((teste9/teste3)*100);
-
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==8 && teste[i].Acidente==1){
-                             
-                              teste10++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media8= ((teste10/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==9 && teste[i].Acidente==1){
-                             
-                              teste11++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media9= ((teste11/teste3)*100);
-                         
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==10 && teste[i].Acidente==1){
-                             
-                              teste12++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media10= ((teste12/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==11 && teste[i].Acidente==1){
-                             
-                              teste13++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media11= ((teste13/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==12 && teste[i].Acidente==1){
-                             
-                              teste14++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media12= ((teste14/teste3)*100);
-
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==13 && teste[i].Acidente==1){
-                             
-                              teste15++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media13= ((teste15/teste3)*100);
-
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==14 && teste[i].Acidente==1){
-                             
-                              teste16++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media14= ((teste16/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==15 && teste[i].Acidente==1){
-                             
-                              teste17++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media15= ((teste17/teste3)*100);
-
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==16 && teste[i].Acidente==1){
-                             
-                              teste18++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media16= ((teste18/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==17 && teste[i].Acidente==1){
-                             
-                              teste19++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media17= ((teste19/teste3)*100);
-
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==18 && teste[i].Acidente==1){
-                             
-                              teste20++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media18= ((teste20/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==19 && teste[i].Acidente==1){
-                             
-                              teste21++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media19= ((teste21/teste3)*100);
-
-                         for(var i=0;i<teste3;i++){
-                            if(teste[i].Seccao==20 && teste[i].Acidente==1){
-                             
-                              teste22++;
-                             
-                            }  
-                          
-                           
-                         } 
-                        
-                         var media20= ((teste22/teste3)*100);
+                         const listasum=sum.map(
+                            (c,i) =>
+                            <p key={i}>{c}</p>
+                         )  
+                        // console.log(media1)
 
                       //  console.log("fds121" ,(teste2.length));
-                      console.log("fds121333344444444" ,(teste4));
+                  if(("/Frescos"+ rotan)== rota ){
+    const sum=[
+                        {name:"Padaria", sum:(probSeccao[6].Average).toFixed(2)*100} 
+                         
+                             //name=['Padaria','Talho','Peixaria','Charcutaria','Frutas e Legumes','Take away']
+                             //sum=[probSeccao[6].Average, media8, media14, media12, media5, media6]
+                            
+                             
+                         
+
+                         ]}
                       
-                     var seccao1="Padaria";
-                     
-                      this.setState({
-                        Nivel_risco: loja2[0].Nivel_risco,
-                        CodigoLoja:loja2[0].CodigoLoja,
-                        seccao1:seccao1,
-                        SaidaAlgoritmo:loja2[0].SaidaAlgoritmo, 
-                        media1:media1.toFixed(2),
-                        
-                        media2:media2.toFixed(2)
-                        });
+                    */
+                    
                        
                      
                       })
@@ -370,122 +125,611 @@ export class Loja extends Component {
              
           
        
+                    
 }
+calculoSeccao(){
+    const location = this.props.location;
+    const rota= location.pathname;
+    const rotan=rota.substring(rota.length-25,rota.length,rota.length);
+    let copiedLoja = Object.assign([{}], this.state.algoritmo);
+    let tamanho = copiedLoja.length;
+    const numeroColabAcidente = [];
+    const deepFilter = (obj, filter) => {
+      //iterate the object
+      for (let key in obj) {
+        const val = obj[key].Seccao;
 
+        //if val is also object (nested)
+        if (val === "object") {
+          //recur
+          deepFilter(val, filter);
+        }
+        // normal value
+        else {
+          //current val fails filter condition
+          //delete it
+          if (filter(val) === false) {
+            obj[key] = obj[key];
+          }
+        }
 
+        //if value is empty obj
+        //delete it
+        if (JSON.stringify(val) === "{}") {
+          delete obj[key];
+        }
+       
+      }
+    };
+    const results = [];
+    for (let i=1; i<=16; i++){
+    deepFilter(copiedLoja, (s) => s === i);   
+     results[i] = copiedLoja.filter((element) => {
+      if (Object.keys(element).length !== 0) {
+        return true;
+      }
+
+      return false;
+    });
+   // console.log( "Resultado secções: ", i,  results); 
+  }
+  /*const resultado =  loja.filter( filterLoja => {
+      for (let i=0; i< loja.length ; i++)
+      return (filterLoja.Seccao === i)}
+      )*/
+      const filterPerSection = (obj, filter) => {
+        //iterate the object
+        for (let key in obj) {
+          const val = obj[key].Seccao;
+
+          //if val is also object (nested)
+          if (val === "object") {
+            //recur
+            filterPerSection(val, filter);
+          }
+          // normal value
+          else {
+            //current val fails filter condition
+            //delete it
+            if (filter(val) === false) {
+              delete obj[key];
+            }
+          }
+
+          //if value is empty obj
+          //delete it
+          if (JSON.stringify(val) === "{}") {
+            delete obj[key];
+          }
+        }
+      };
+      const average = [];
+      for (let i=1; i<=16; i++){
+
+      filterPerSection(results[i], (s) => s === i);   
+       average[i] = results[i].filter((element) => {
+        if (Object.keys(element).length !== 0) {
+          return true;
+        }
+
+        return false;
+      });
+      //console.log( "Resultado secções: ", i,  average); 
+    }
+    const filterSectionAc = (obj, filter) => {
+      //iterate the object
+      for (let key in obj) {
+        const val = obj[key].Acidente;
+
+        //if val is also object (nested)
+        if (val === "object") {
+          //recur
+          filterSectionAc(val, filter);
+        }
+        // normal value
+        else {
+          //current val fails filter condition
+          //delete it
+          if (filter(val) === false) {
+            delete obj[key];
+          }
+        }
+
+        //if value is empty obj
+        //delete it
+        if (JSON.stringify(val) === "{}") {
+          delete obj[key];
+        }
+      }
+    };
+    for (let i=1; i<=16; i++){
+      numeroColabAcidente[i] = average[i].length;
+    filterSectionAc(average[i], (s) => s === 1);
+    }
+    const averageAcidente = average;
+    for (let j=1; j<=16; j++){
+       averageAcidente[j] = averageAcidente[j].filter((element) => {
+        if (Object.keys(element).length !== 0) {
+          return true;
+        }
+
+        return false;
+      });
+      //console.log( "Resultado colaboradores em risco de acidente: ", j,  averageAcidente); 
+    }
+    console.log("Prob. Acidente Colaborador = 1:", average);
+    const averageresult = [] ;
+    for(let i = 1; i<average.length; i++){
+        averageresult[i-1]= {
+         "Section" : i,
+         "ColaboradoresAcidente": (average[i].length),
+         "Colaboradores": (numeroColabAcidente[i]),
+         "Average" : parseFloat(average[i].length / numeroColabAcidente[i])
+        }
+    } 
+    console.log("Risco de acidente por secção:", averageresult);
+    //setData(averageresult);
+    return averageresult
+  }
+
+  averageLoja(algoritmo){
+    
+    let resultado = 0;
+    let count = 1;
+    for(let i = 0; i < algoritmo.length; i++ ){
+      if(isNaN(algoritmo[i].Average) === false && algoritmo[i].Average!==0){
+      resultado = resultado + algoritmo[i].Average;  
+      console.log("averageLoja: ", i, algoritmo[i].Average );
+      count++; 
+      }                       
+    }
+    console.log("Média loja:", resultado/count)
+   
+    
+                         return resultado/count
+  }
+  arrayArea(array) {
+    const area = [{
+        Area: "Frescos",
+        Sections: [
+          {
+            Nome: "Padaria",
+            Data: array[6],
+          },
+          {
+            Nome: "Talho",
+            Data: array[7],
+          },
+          {
+            Nome: "Peixaria",
+            Data: array[13],
+          },
+          {
+            Nome: "Charcutaria",
+            Data: array[11],
+          },
+          {
+            Nome: "Frutas",
+            Data: array[4],
+          },
+          {
+            Nome: "Takeaway",
+            Data: array[5],
+          },
+        ]},
+        {
+        Area: "Suporte",
+        Sections: [
+          {
+            Nome: "Decoração",
+            Data: array[9],
+          },
+          {
+            Nome: "Manutenção",
+            Data: "",
+          },
+          {
+            Nome: "Gestor Loja",
+            Data: array[1],
+          }
+        ]},
+        {
+        Area: "Caixas",
+        Sections: [
+          {
+            Nome: "Caixas",
+            Data: array[12],
+          },
+          {
+            Nome: "Têxtil",
+            Data: array[14],
+          }
+        ]},{
+        
+        Area: "Alimentar",
+        Sections: [
+          {
+            Nome: "Alimentar",
+            Data: array[0],
+          },
+         
+        ]
+      }];
+      return area;
+    }
+
+    search(){
+
+    }
 
   render() {
-    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade, CodigoLoja,Nivel_risco,seccao1 , media1, media2} = this.state;
+    const probSeccao = this.calculoSeccao();
+    const seccao = this.arrayArea(probSeccao);
+    console.log("Objeto do algoritmo com probabilidade por secção: ", probSeccao);  
+    const location = this.props.location;
+    const rota= location.pathname;
+    const rotan=rota.substring(rota.length-25,rota.length,rota.length); 
+    console.log("Objeto ", rota);  
+    const {Nome, Cadeia,Insignia,DOP, Distrito, Freguesia, Morada, CodigoPost, Localidade,CodigoLoja,Nivel_risco, listaareas, listasum} = this.state;
+    const sum=[];
+    const name=[];
+    /*if(("/Frescos"+ rotan)== rota ){
+   
+                          //  {name:"Padaria", sum:(probSeccao[6].Average).toFixed(2)*100} 
+                             
+                                // name=['Padaria','Talho','Peixaria','Charcutaria','Frutas e Legumes','Take away']
+                                 //sum=[probSeccao[6].Average, media8, media14, media12, media5, media6]
+                                
+                              
+                             
+    
+                            
+                             }*/
 
     return (
-     
+    
+          
        
-       
-          <div className="row">
+          <div  className="row">
           <div className="col-md-8 grid-margin stretch-card">
-            <div className="card">
+            <div className="card" >
               <div className="card-body">
                 <h4 className="card-title" style={{ fontSize: 30,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675",  textAlign:'center'}}>Secção</h4>
                 <div className="row"  style={{  marginTop: 40}}>
-                    <div className="col-md-4 grid-margin ">
-                    <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
+                    
+           {
+            seccao.map(({Sections, Area}) => {
+                if(Area==="Frescos"  && rota===("/Frescos" + rotan)){
+                    console.log("teste1233333333333333",Sections)
+                    return(
+            Sections.map(({Nome,Data}, index) => {
+                    console.log("teste1233333333333333",Nome)
+                    
+                return(
+                    <div  className="col-md-4 grid-margin ">
+                   <div
+          className="card"
+          style={
+            (index % 2 === 0) ?
+            {
+            backgroundColor: "#335675",
+            textAlign: "center",
+            borderRadius: 8,
+            color:"#FFFFFF"
+          }: 
+          {
+            backgroundColor: "lightgrey",
+            textAlign: "center",
+            borderRadius: 8,
+            color:"#335675"
+          }
+        }
+        >
                     
                     <div className="box1" style={{ textAlign:'center'}}>
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
                     
-                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >{seccao1}</h3>
+                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10,}} className="textoCartoes"> {Nome}</h3>
                  
-                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas </p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             {media1 }%
+                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas </p>
+                    <h1     style={
+                  Data.Average <= 0.3
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "green",
+                      }
+                    : Data.Average < 0.6
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "#ffc107",
+                      }
+                    : {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "grey",
+                      }
+                } className="textoCartoes">
+                    {Data.Average.toFixed(2) * 100}%
+                    
            </h1>
+
+
+           
                        
                         </div>
                         </div>
 </div>
-                        <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
-                        <div className="box1">
+                     
+);
+                }) 
+                    ); 
+            }    
+       
+                  
+                                                        
+     
+            if(Area==="Suporte"  && rota===("/Suporte" + rotan)){
+                return(
+                    Sections.map(({Nome,Data}, index) => {
+                            console.log("teste1233333333333333",Nome)
+                            
+                        return(
+                            <div  className="col-md-4 grid-margin ">
+                           <div
+                  className="card"
+                  style={
+                    (index % 2 === 0) ?
+                    {
+                    backgroundColor: "#335675",
+                    textAlign: "center",
+                    borderRadius: 8,
+                    color:"#FFFFFF"
+                  }: 
+                  {
+                    backgroundColor: "lightgrey",
+                    textAlign: "center",
+                    borderRadius: 8,
+                    color:"#335675"
+                  }
+                }
+                >
+                            
+                            <div className="box1" style={{ textAlign:'center'}}>
+                            <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                            
+                            <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10,}} className="textoCartoes"> {Nome}</h3>
+                         
+                            <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas </p>
+                            <h1     style={
+                          Data.Average <= 0.3
+                            ? {
+                                fontSize: 25,
+                                height: 40,
+                                marginBottom: 0,
+                                borderRadius: 8,
+                                color: "#F2F3F8",
+                                backgroundColor: "green",
+                              }
+                            : Data.Average < 0.6
+                            ? {
+                                fontSize: 25,
+                                height: 40,
+                                marginBottom: 0,
+                                borderRadius: 8,
+                                color: "#F2F3F8",
+                                backgroundColor: "#ffc107",
+                              }
+                            : {
+                                fontSize: 25,
+                                height: 40,
+                                marginBottom: 0,
+                                borderRadius: 8,
+                                color: "#F2F3F8",
+                                backgroundColor: "grey",
+                              }
+                        } className="textoCartoes">
+                            {Data.Average.toFixed(2) * 100}%
+                            
+                   </h1>
+        
+        
+                   
+                               
+                                </div>
+                                </div>
+        </div>
+                             
+        );
+                        }) 
+                            ); 
+                            
+                    }   
+                    if(Area==="Caixas"  && rota===("/Caixas" + rotan)){
+                        return(
+                            Sections.map(({Nome,Data}, index) => {
+                                    console.log("teste1233333333333333",Nome)
+                                    
+                                return(
+                                    <div  className="col-md-4 grid-margin ">
+                                   <div
+                          className="card"
+                          style={
+                            (index % 2 === 0) ?
+                            {
+                            backgroundColor: "#335675",
+                            textAlign: "center",
+                            borderRadius: 8,
+                            color:"#FFFFFF"
+                          }: 
+                          {
+                            backgroundColor: "lightgrey",
+                            textAlign: "center",
+                            borderRadius: 8,
+                            color:"#335675"
+                          }
+                        }
+                        >
+                                    
+                                    <div className="box1" style={{ textAlign:'center'}}>
+                                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                                    
+                                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10,}} className="textoCartoes"> {Nome}</h3>
+                                 
+                                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas </p>
+                                    <h1     style={
+                                  Data.Average <= 0.3
+                                    ? {
+                                        fontSize: 25,
+                                        height: 40,
+                                        marginBottom: 0,
+                                        borderRadius: 8,
+                                        color: "#F2F3F8",
+                                        backgroundColor: "green",
+                                      }
+                                    : Data.Average < 0.6
+                                    ? {
+                                        fontSize: 25,
+                                        height: 40,
+                                        marginBottom: 0,
+                                        borderRadius: 8,
+                                        color: "#F2F3F8",
+                                        backgroundColor: "#ffc107",
+                                      }
+                                    : {
+                                        fontSize: 25,
+                                        height: 40,
+                                        marginBottom: 0,
+                                        borderRadius: 8,
+                                        color: "#F2F3F8",
+                                        backgroundColor: "grey",
+                                      }
+                                } className="textoCartoes">
+                                    {Data.Average.toFixed(2) * 100}%
+                                    
+                           </h1>
+                
+                
+                           
+                                       
+                                        </div>
+                                        </div>
+                </div>
+                                     
+                );
+            }) 
+            );   
+    } 
+    if(Area==="Alimentar"  && rota===("/Alimentar" + rotan)){
+        return(
+            Sections.map(({Nome,Data}, index) => {
+                    console.log("teste1233333333333333",Nome)
+                    
+                return(
+                    <div  className="col-md-4 grid-margin ">
+                   <div
+          className="card"
+          style={
+            (index % 2 === 0) ?
+            {
+            backgroundColor: "#335675",
+            textAlign: "center",
+            borderRadius: 8,
+            color:"#FFFFFF"
+          }: 
+          {
+            backgroundColor: "lightgrey",
+            textAlign: "center",
+            borderRadius: 8,
+            color:"#335675"
+          }
+        }
+        >
+                    
+                    <div className="box1" style={{ textAlign:'center'}}>
                     <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
                     
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Não Alimentar</h3>
+                    <h3  style={{ fontSize: 20, textAlign:'center', marginTop:10,}} className="textoCartoes"> {Nome}</h3>
                  
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center',color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             {media2}%
-           </h1>
-                        </div>
-                        </div>
-                      
-                        </div>
-                        <div className="col-md-4 grid-margin " >
-                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center', borderRadius: 8   }}>
-                        <div className="box1">
-                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
+                    <p className="textoCartoes" style={{  fontSize: 12,  textAlign:'center'}} >Nivel de risco nas últimas horas </p>
+                    <h1     style={
+                  Data.Average <= 0.3
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "green",
+                      }
+                    : Data.Average < 0.6
+                    ? {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "#ffc107",
+                      }
+                    : {
+                        fontSize: 25,
+                        height: 40,
+                        marginBottom: 0,
+                        borderRadius: 8,
+                        color: "#F2F3F8",
+                        backgroundColor: "grey",
+                      }
+                } className="textoCartoes">
+                    {Data.Average.toFixed(2) * 100}%
                     
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Suporte</h3>
-                 
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
            </h1>
+
+
+           
+                       
                         </div>
                         </div>
-                      
-                        </div>
-                        <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
-                        <div className="box1">
-                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
-                    
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Caixas</h3>
-                 
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
-           </h1>
-                        </div>
-                        </div>
-                      
-                        </div>
-                        <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
-                        <div className="box1">
-                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
-                    
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Têxtil</h3>
-                 
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
-           </h1>
-           </div>
-                        </div>
-                      
-                        </div>
-                        <div className="col-md-4 grid-margin">
-                        <div className="card" style={{backgroundColor:"#335675", textAlign:'center' , borderRadius: 8  }}>
-                        <div className="box1">
-                    <img className="imgCartoes" src={Frescos} alt="" style={{ height:70, marginTop: -30}}/>
-                    
-                    <h3  style={{ fontSize: 20,  textAlign:'center', marginTop:10, color:"#F2F3F8"}} className="textoCartoes" >Alimentar</h3>
-                 
-                    <p className="textoCartoes" style={{ fontSize: 12,  textAlign:'center', color:"#F2F3F8"}} >Nivel de risco nas últimas horas</p>
-                    <h1 style={{ fontSize: 25, color:"#F2F3F8",backgroundColor:"#CB3130" , height:40 , marginBottom:0, borderRadius: 8,  }} className="textoCartoes">
-             45%
-           </h1>
-           </div>
-                        </div>
-                      
-                        </div>
+</div>
+                     
+);
+}) 
+); 
+}             
+}         
+            
+            )
+                                            
+}
+     
+     
+
+
+     
+
                </div>
               </div>
             </div>
           </div>
+
+
+
+
+          
           <div className="col-md-4 grid-margin stretch-card">
             <div className="card">
               <div className="card-body">
-              <h2  style={{ fontSize: 20,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675"}}> <img className="variaveis"  style={{width: 18}}  ></img> {Nome}</h2>
+              <h2  style={{ fontSize: 20,  fontstyle: "normal",fontfamily: 'Rubik', color:"#335675"}}> 
+              <img className="variaveis"  src={location2} style={{width: 18}}  ></img> {Nome}</h2>
                 <div className="row">
                 <div className="col-12">
                   <br/><br/>
@@ -500,6 +744,7 @@ export class Loja extends Component {
                     <p style={{color:"#335675"}}>Localidade: <strong>{Localidade}</strong>  </p>
                     
                   </div>
+                
                 </div>
                
                
@@ -511,10 +756,10 @@ export class Loja extends Component {
                       
   </div>
  
-
-      
-    )
-  }
+                );
 }
+ 
 
-export default Loja
+  }    
+
+export default Loja;
