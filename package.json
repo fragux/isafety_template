@@ -37,6 +37,7 @@
     "leaflet-loading": "^0.1.24",
     "material-table": "^1.69.3",
     "namor": "^1.1.3",
+    "node-cron": "^3.0.0",
     "node-sass": "^7.0.1",
     "react": "^18.0.0",
     "react-ace": "^7.0.4",

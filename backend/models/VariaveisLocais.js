@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose')
 
-const perfilSchema = new mongoose.Schema({
+const variaveisLocaisSchema = new mongoose.Schema({
     Nome:  {
         type: String,
         
@@ -24,4 +24,4 @@ const perfilSchema = new mongoose.Schema({
 
 })
 
-mongoose.model('perfil ', perfilSchema ,'perfil ')
+mongoose.model('variaveisLocais ', variaveisLocaisSchema ,'variaveisLocais ')

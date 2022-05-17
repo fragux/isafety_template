@@ -6,6 +6,7 @@ import "./i18n";
 import * as serviceWorker from "./serviceWorker";
 
 
+
 const container = document.getElementById("root");
 const root = ReactDOM.createRoot(container);
 root.render(
@@ -15,3 +16,4 @@ root.render(
 );
 
 serviceWorker.unregister();
+

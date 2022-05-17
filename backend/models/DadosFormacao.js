@@ -1,27 +1,33 @@
 const mongoose = require ('mongoose')
 
-const perfilSchema = new mongoose.Schema({
-    Nome:  {
+const dadosFormacaoSchema = new mongoose.Schema({
+    dataadmissao:  {
         type: String,
         
         required: true
     },
-    Email:  {
+    Sexo:  {
         type: String,
         
         required: true
     },
-    Password:  {
+    TipoEvento:  {
         type: String,
         
         required: true
     },
-    telemovel:  {
+    CategoriaEvento:  {
+        type: Number,
+        
+        required: true
+    },
+    HorasSST:  {
         type: Number,
         
         required: true
     },
 
+
 })
 
-mongoose.model('perfil ', perfilSchema ,'perfil ')
+mongoose.model('dadosFormacao ', dadosFormacaoSchema ,'dadosFormacao ')

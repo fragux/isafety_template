@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose')
 
-const colaboradorSchema = new mongoose.Schema({
+const colab = new mongoose.Schema({
     
     AmbienteSeg:  {
         type: Number,
@@ -125,4 +125,5 @@ const colaboradorSchema = new mongoose.Schema({
         required: true
     }
 })
-mongoose.model('colaborador ', colaboradorSchema ,'colaborador ')
+
+module.exports = mongoose.model('colaborador', colab)
