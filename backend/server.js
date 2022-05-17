@@ -5,6 +5,7 @@ const dotenv= require('dotenv')
 const routesUrls = require('./routes/routes')
 const cors = require('cors')
 const cron = require("node-cron");
+const shell = require('shelljs');
 
 dotenv.config()
 
@@ -16,11 +17,15 @@ app.use(cors())
 app.use('/app', routesUrls)
 app.listen(3000, () => console.log("Server up and running!"))
 
-cron.schedule ( "* * * * * *" ,  ( )  =>  { 
-    
-    console.log ( 'executando uma tarefa a cada segundo' ) ; 
-    
-  },{
-      timezone:"Portugal"
-  }
-   ) ;
+cron.schedule ( "0 */6 * * *" ,  ( )  =>  {     
+    console.log('---------------------');
+    console.log('Running Cron Job');
+    console.log('---------------------');
+    console.log('Algoritmo iSafety -> 6H');
+    if (shell.exec('py isafety.py').code !== 0) {
+        shell.exit(1);
+    }
+      else {
+        shell.echo('Cron task completed!!!!');
+      }
+});
