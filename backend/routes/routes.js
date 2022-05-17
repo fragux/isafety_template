@@ -6,7 +6,8 @@ const lojaDataCopy = require("../models/Loja");
 const bcrypt = require("bcrypt");
 const saidaalgoritmo = require("../models/saidaalgoritmo");
 const areas = require("../models/Area");
-const ewadados=require("../models/EWA")
+const ewadados=require("../models/EWA");
+const algoritmoPython = require("../models/Algoritmo")
 
 router.use(express.json({ extended: true }));
 
@@ -320,6 +321,8 @@ router.post("/submetealgoritmo", async (req, res) => {
     
 });
 
+
+
 router.get("/algoritmo/:idloja", async (req, res) => {
   try {
     const data = await saidaalgoritmo.findOne({ LojaId: req.params.idloja});
@@ -347,6 +350,33 @@ router.get("/algoritmo/saida/:idloja", function (req, res, next) {
     })
     .catch(next);
 });
+
+//endpoint para algoritmo do python
+router.get("/python", async (request, res) => {
+  try {
+    console.log("Algoritmo /python");
+    const dataAlgoritmo = await algoritmoPython.find();
+      res.status(200).json(dataAlgoritmo);
+    } catch (error) {
+      res.status(500).json({ erro: error });
+    }
+  });
+
+router.get("/python/:idloja", async (req, res) => {
+  try {
+    console.log("Algoritmo /python/:idloja=" + req.params.idloja);
+    const dataAlgoritmo = await algoritmoPython.findOne({ _id: req.params.idloja});
+    if(!dataAlgoritmo) {
+      res.status(422).json({ message: "Algoritmo não encontrado!" });
+      return;
+    }
+    res.status(200).json(dataAlgoritmo);
+  } catch (err) {
+    res.status(500).json({ message: err });
+  }
+});
+
+
 
 router.get("/algoritmo/saida/:idloja/saidaalgoritmo", function (req, res, next) {
   console.log("Port 3000 - Query: ", req.body.saidaalgoritmo.id);

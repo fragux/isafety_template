@@ -412,7 +412,7 @@ calculoSeccao(){
       0
     );
                 return(
-                    <div  className="col-md-4 grid-margin ">
+                    <div  className="col-md-4 grid-margin mt-4">
                    <div
           className="card"
           style={

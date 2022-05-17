@@ -457,7 +457,7 @@ export class Loja extends Component {
   gradiente(value) {
     if (value <= 0.3)
         return (
-          <div className="px-6 d-flex align-items-center">
+          <div className="px-4 d-flex align-items-center">
             <svg width="0" height="0">
               <defs>
                 <linearGradient
@@ -484,7 +484,7 @@ export class Loja extends Component {
         );
   if(value > 0.6)
         return (
-          <div className="px-6 d-flex align-items-center">
+          <div className="px-4 d-flex align-items-center">
             <svg width="0" height="0">
               <defs>
                 <linearGradient
@@ -512,7 +512,7 @@ export class Loja extends Component {
 
     if (value > 0.3 && value <= 0.6)
         return (
-          <div className="px-6 d-flex align-items-center">
+          <div className="px-4 d-flex align-items-center">
             <svg width="0" height="0">
               <defs>
                 <linearGradient
@@ -568,14 +568,14 @@ export class Loja extends Component {
     const rota = location.pathname;
     const rotan = rota.substring(10, rota.length);
     return (
-      <div className="row">
+      <><div className="row">
         <div className="col-md-8 grid-margin stretch-card">
           <div className="card">
             <div className="card-body">
               <h4
                 className="card-title"
                 style={{
-                  fontSize: 30,
+                  fontSize: 25,
                   fontstyle: "normal",
                   fontfamily: "Rubik",
                   color: "#335675",
@@ -639,7 +639,7 @@ export class Loja extends Component {
             </div>
           </div>
         </div>
-        <div className="row" style={{ padding: "0 1rem 0 1rem" }}>
+      </div><div className="row" >
           <div className="col-md-12 d-flex grid-margin stretch-card">
             <div className="card" style={{ paddingBottom: "2rem" }}>
               <div className="card-body">
@@ -652,11 +652,11 @@ export class Loja extends Component {
                   }}
                 >
                   {" "}
-                  <img className="variaveis" style={{ width: 18 }}></img> Nivel
+                  <img className="variaveis" style={{ width: 18 }}></img> Nível
                   de risco geral
                 </h2>
               </div>
-              <div className="row">
+              <div className="row" >
                 <div
                   className="col-md-2  "
                   style={{
@@ -767,8 +767,8 @@ export class Loja extends Component {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div></>
+     // </div>
     );
   }
 }
