@@ -14,13 +14,14 @@ const BasicElements = lazy(() => import('./form-elements/BasicElements'));
 const BasicTable = lazy(() => import('./tables/BasicTable'));
 
 const Loja = lazy(() => import('./Loja/loja'));
-
+const Historico = lazy(() => import('./historico/historico'));
+const Risco = lazy(() => import('./Risco/risco'));
 const Seccao = lazy(() => import('./Loja/Seccao'));
 
 const Error404 = lazy(() => import('./error-pages/Error404'));
 const Error500 = lazy(() => import('./error-pages/Error500'));
 
-const Login = lazy(() => import('./user-pages/Login'));
+const Login = lazy(() => import('./log'));
 const Register1 = lazy(() => import('./user-pages/Register'));
 
 
@@ -28,6 +29,7 @@ class AppRoutes extends Component {
   render () {
     return (
       <Suspense fallback={<Spinner/>}>
+        
         <Switch>
           <Route exact path="/dashboard" component={ Dashboard } />
 
@@ -56,8 +58,11 @@ class AppRoutes extends Component {
           <Route path="/NAlimentar" component={ Seccao } />
           <Route path="/Frescos" component={ Seccao } />
 
-          <Route path="/user-pages/login-1" component={ Login } />
-          <Route path="/user-pages/register-1" component={ Register1 } />
+          <Route path="/user-pages/login" component={ Login } />
+          <Route path="/user-pages/register" component={ Register1 } />
+
+          <Route path="/Historico" component={ Historico } />
+          <Route path="/Risco" component={ Risco } />
 
           <Route path="/error-pages/error-404" component={ Error404 } />
           <Route path="/error-pages/error-500" component={ Error500 } />

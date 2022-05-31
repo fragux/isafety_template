@@ -92,7 +92,7 @@ class Navbar extends Component {
                     </div>
                   </Dropdown.Item>
                   <div className="dropdown-divider"></div>
-                  <h6 className="p-3 mb-0 text-center cursor-pointer"> See all notifications </h6>
+                 <a href="/Historico"> <h6 className="p-3 mb-0 text-center cursor-pointer" > See all notifications </h6></a>
                 </Dropdown.Menu>
               </Dropdown>
             </li>
@@ -155,15 +155,18 @@ class Navbar extends Component {
               <Dropdown alignRight>
               <Dropdown.Toggle className="nav-link count-indicator">
                   <div className="nav-profile-img">
-                      <img src={require("../../assets/logo/_user_abel_pires.jpg")} alt="profile"  style={{width: "35px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}}/>
+                      <img src={require("../../assets/Markers/User.png")} alt="profile"  style={{width: "35px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}}/>
                     </div>
                    
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="preview-list navbar-dropdown">
+                   {/*
                   <div className="p-3 text-center bg-primary">
-                 
-                    <img className="img-avatar img-avatar48 img-avatar-thumb" src={require("../../assets/logo/_user_abel_pires.jpg")} alt="" style={{width: "45px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}} />
-                  </div>
+                
+                    <img className="img-avatar img-avatar48 img-avatar-thumb" src={require("../../assets/Markers/User.png")} alt="" style={{width: "45px" , borderRadius : "5rem", marginLeft: "-1rem", marginTop: "-0.5rem"}} />
+    
+                    </div>
+                    */}
                   <div className="p-2">
                     <h5 className="dropdown-header text-uppercase pl-2 text-dark"> User Options </h5>
                     <Dropdown.Item className="dropdown-item d-flex align-items-center justify-content-between" href="!#" onClick={evt =>evt.preventDefault()}>
@@ -173,7 +176,7 @@ class Navbar extends Component {
                         <i className="mdi mdi-email-open-outline ml-1"></i>
                       </span>
                     </Dropdown.Item>
-                    <Dropdown.Item className="dropdown-item d-flex align-items-center justify-content-between" href="!#" onClick={evt =>evt.preventDefault()}>
+                    <Dropdown.Item className="dropdown-item d-flex align-items-center justify-content-between" href="/user-pages/login-1" onClick={evt =>evt.preventDefault()}>
                       <span> Profile </span>
                       <span className="p-0">
                         <span className="badge badge-success">1</span>

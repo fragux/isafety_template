@@ -193,23 +193,24 @@ class Sidebar extends Component {
           */}
           <li className="nav-item sidebar-user-actions mt-5">
             <div className="sidebar-user-menu">
-              <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-settings menu-icon"></i>
-                <span className="menu-title"> Definições </span>
+            <a href="/Risco"  className="nav-link" >{/*<i className="mdi mdi-speedometer menu-icon"></i>*/}
+              
+                <span className="menu-title"> Histórico  </span>
               </a>
             </div>
           </li>
           <li className="nav-item sidebar-user-actions">
             <div className="sidebar-user-menu">
-              <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-speedometer menu-icon"></i>
-                <span className="menu-title"> Histórico </span></a>
+            <a href="!#" onClick={event => event.preventDefault()} className="nav-link"> {/*<i className="mdi mdi-settings menu-icon"></i>*/}
+                <span className="menu-title">  Definições</span></a>
             </div>
           </li>
-          <li className="nav-item sidebar-user-actions">
+          {/*<li className="nav-item sidebar-user-actions">
             <div className="sidebar-user-menu">
               <a href="!#" onClick={event => event.preventDefault()} className="nav-link"><i className="mdi mdi-logout menu-icon"></i>
                 <span className="menu-title"> Sair </span></a>
             </div>
-          </li>
+        </li>*/}
         </ul>
       </nav>
     );
