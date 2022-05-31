@@ -4,8 +4,8 @@ import json
 from pickle import TRUE
 from random import random, randrange
 
-from bson import ObjectId
-
+from bson.objectid import ObjectId
+ 
 
 
 def get_database():
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     from io import StringIO
     from dateutil import parser
     import time
-    from bson.objectid import ObjectId
+   
     from random import randint
     # Get the database
     dbname = get_database()
