@@ -67,7 +67,7 @@ export class Historico extends Component {
 
     alert("Alerta criado com sucesso!");
     window.location.reload();
-    
+   
   
 }
 
@@ -76,7 +76,7 @@ export class Historico extends Component {
        
         return (
             <Modal show={showModal } size='mb' onHide={this.handleClose} animation={true} >
-                <Modal.Header closeButton class="close" data-bs-dismiss="modal" aria-label="Close">
+                <Modal.Header closeButton className="close" data-bs-dismiss="modal" aria-label="Close">
                
                 
                 <Form className="mb-12" style={{ width:500}} onSubmit={this.handleSubmit}>
@@ -124,7 +124,7 @@ export class Historico extends Component {
        
         return (
             <Modal show={showModal2 } size='mb' onHide={this.handleCloseinfo}  animation={true} >
-                <Modal.Header closeButton class="close" data-bs-dismiss="modal" aria-label="Close">
+                <Modal.Header closeButton className="close" data-bs-dismiss="modal" aria-label="Close">
                 <Modal.Body>
                 <div style={{width: 170, alignContent:"center", marginLeft:120}}>
                 <CircularProgressbar

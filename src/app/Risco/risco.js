@@ -14,13 +14,13 @@ const mapData = {
     US: 20
   };
 
+
 export class Historico extends Component {
    
 
   constructor(props) {
     super(props);
     this.state = {
-      
       visitChartData: {},
       impressionChartData: {},
       conversionChartData: {},
@@ -407,11 +407,11 @@ export class Historico extends Component {
   usersDoughnutChartData = {
     datasets: [{
       data: [80, 34, 100],
-      backgroundColor: [
+    /*  backgroundColor: [
         "#19d895",
         "#2196f3",
         "#dde4eb"
-      ],
+      ],*/
       borderColor: [
         "#19d895",
         "#2196f3",
@@ -450,9 +450,9 @@ export class Historico extends Component {
     datasets: [{
       label: 'Profit',
       data: [39, 19, 25, 16, 31, 39, 12, 18, 33, 24],
-      backgroundColor: [
-        '#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3',
-      ],
+      //backgroundColor: [
+      //  '#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3',
+     // ],
       borderColor: [
         '#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3','#2196f3',
       ],
@@ -502,7 +502,7 @@ export class Historico extends Component {
         55,59,59,59,57,56,57,54,56,58,57,59,58,59,57,55,56,54,52,49,48,50,50,46,45,49,50,52,53,52,55,54,53,56,55,56,55,54,55,57,58,56,55,56,57,58,59,58,57,55,53,52,55,57,55,54,52,55,57,56,57,58,59,58,59,57,56,55,57,58,59,60,62,60,59,58,57,56,57,56,58,59
       ],
       borderColor: '#9B86F1',
-      backgroundColor: 'rgba(255,255,255,0.2)',
+      //backgroundColor: 'rgba(255,255,255,0.2)',
       borderWidth: 3,
       fill: 'origin'
     }]
@@ -537,14 +537,14 @@ export class Historico extends Component {
     datasets: [{
         label: 'Profit',
         data: [330, 380, 230, 400, 309, 530, 340],
-        backgroundColor: "#0f5bff",
+        //backgroundColor: "#0f5bff",
         borderColor: '#0f5bff',
         borderWidth: 0
       },
       {
         label: 'Target',
         data: [600, 600, 600, 600, 600, 600, 600],
-        backgroundColor: '#e5e9f2',
+        //backgroundColor: '#e5e9f2',
         borderColor: '#e5e9f2',
         borderWidth: 0
       }
@@ -599,7 +599,7 @@ export class Historico extends Component {
     datasets: [{
         label: 'OVERDUE',
         data:[145, 238, 148, 293, 242, 235, 256, 334],
-        backgroundColor: '#826af9',
+        //backgroundColor: '#826af9',
         borderColor: '#826af9',
         borderWidth: 0
       }, {
@@ -611,7 +611,7 @@ export class Historico extends Component {
       {
         label: 'COMPLETED',
         data: [375, 440, 284, 450, 386, 480, 400, 365],
-        backgroundColor: '#d0aeff',
+        //backgroundColor: '#d0aeff',
         borderColor: '#d0aeff',
         borderWidth: 0
       },
@@ -678,7 +678,7 @@ export class Historico extends Component {
 
   componentDidMount(){
 
-    
+    /*
 
     var ctx5 = document.getElementById('salesStatisticsChart').getContext("2d")
     var gradientBar5 = ctx5.createLinearGradient(0, 0, 0, 450)
@@ -692,7 +692,7 @@ export class Historico extends Component {
 
    
     
-
+*/
    
 
     var Datas = [60, 75, 65, 130, 130, 145, 110, 145, 155, 149, 170];
@@ -709,14 +709,14 @@ export class Historico extends Component {
         label: 'Revenue',
         data: Datas,
         borderColor: '#8862e0',
-        backgroundColor: gradientBar5,
+        
         borderWidth: 2,
         fill: true
       }, {
         label: 'Sales',
         data: Datas1,
         borderColor: '#5ed2a1',
-        backgroundColor: gradientBar6,
+        
         borderWidth: 2,
         fill: true
       }]
@@ -724,7 +724,7 @@ export class Historico extends Component {
 
     this.setState(salesStatisticsData);
 
-
+/*
 
     const netProfitData = {
       labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
@@ -763,6 +763,25 @@ export class Historico extends Component {
   toggleProBanner() {
     document.querySelector('.proBanner').classList.toggle("hide");
   }
+  async componentDidMount() {
+    
+ const location = this.props.location;
+    const rota = location.pathname;
+    const rotan = rota.substring(10, rota.length);
+    
+     axios.get(`http://127.0.0.1:3000/app/historico/`+ rotan).then((res) => {
+       const historico = res.data;
+       this.setState({ historico });
+       this.setState({
+         Nivel_risco:historico.Nivel_risco,
+         Codigo_Loja:historico.Codigo_Loja,
+         LojaId:historico.lojaId,
+         SaidaAlgoritmo:historico.SaidaAlgoritmo,
+        
+       });
+       console.log(historico);
+     });*/
+    }
     render() {
        
         return (
@@ -780,7 +799,7 @@ export class Historico extends Component {
                   
                   <ul className="nav nav-tabs " role="tablist">
                     <li className="nav-item">
-                      <button className={`nav-link ${this.state.active === "sales-statistics_switch_1"? 'active': ''}`} id="sales-statistics_switch_1" onClick={this.changeChartOneData} data-toggle="tab" role="tab" aria-selected="false">1 DIA</button>
+                      <button className={`nav-link ${this.state.active === "sales-statistics_switch_1"? 'active': ''}`} id="sales-statistics_switch_1" onClick={this.changeChartOneData}  data-toggle="tab" role="tab" aria-selected="false">1 DIA</button>
                     </li>
                     <li className="nav-item">
                       <button className={`nav-link ${this.state.active === "sales-statistics_switch_2"? 'active': ''}`} id="sales-statistics_switch_2" onClick={this.changeChartTwoData} data-toggle="tab" role="tab" aria-selected="false">7 DIAS</button>
@@ -791,6 +810,7 @@ export class Historico extends Component {
                     <li className="nav-item">
                       <button className={`nav-link ${this.state.active === "sales-statistics_switch_4"? 'active': ''}`} id="sales-statistics_switch_4" onClick={this.changeChartFourData} data-toggle="tab" role="tab" aria-selected="false">1 ANO</button>
                     </li>
+                    
                   </ul>
                 </div>
                 <div className="d-xl-flex flex-column flex-lg-row">
@@ -812,7 +832,7 @@ export class Historico extends Component {
         <br/>
         <br/>
                 {/*<Line data={this.data} options={this.options} />*/}
-                <Line data={this.state} options={this.state.salesStaticsOptions}  datasetKeyProvider={this.datasetKeyProvider} height={50} width={140} id="salesStatisticsChart" />               
+                <Line data={this.state} options={this.state.salesStaticsOptions}  datasetKeyProvider={this.datasetKeyProvider} height={50} width={140} ScaleChartOptions={10} id="salesStatisticsChart" />               
               </div>
             </div>
           </div>

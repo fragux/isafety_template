@@ -11,6 +11,7 @@ const algoritmoroutes=require ('../backend/server/routes/algoritmoRoutes')
 const ewaroutes=require ('../backend/server/routes/ewaRoutes')
 const useroutes=require ('../backend/server/routes/userRoutes')
 const alert=require ('../backend/server/routes/alertasRoutes')
+const Historico =require('../backend/server/routes/historicoRoutes')
 const cors = require('cors')
 const cron = require("node-cron");
 const shell = require('shelljs');
@@ -60,9 +61,11 @@ app.use(cors())
 app.use('/app', routesUrls)
 app.use('/app', lojaroutes)
 app.use('/app', algoritmoroutes)
+app.use('/app', Historico)
 app.use('/app', ewaroutes)
 //app.use('/app', useroutes)
 app.use('/app', alert)
+
 app.listen(3000, () => console.log("Server up and running!"))
 
 cron.schedule ( "0 */6 * * * *" ,  ( )  =>  {     
